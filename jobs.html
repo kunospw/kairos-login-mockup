@@ -34,6 +34,96 @@
     <div class="app-container">
         <!-- Top Toolbar -->
         <header class="toolbar">
+            <div class="user-profile" id="userProfileBtn" style="cursor:pointer">
+                <i data-lucide="circle-user"></i>
+                <div class="user-info-text">
+                    <span class="user-name">ARIF .</span>
+                    <span class="user-id">01074115</span>
+                </div>
+            </div>
+            
+            <div class="toolbar-actions">
+                <i data-lucide="lock" id="lockBtn" style="cursor:pointer"></i>
+                <i data-lucide="log-out" onclick="location.href='index.html'" style="cursor:pointer"></i>
+            </div>
+        </header>
+
+        <!-- Session Profile Modal -->
+        <div class="modal-overlay" id="profileModal">
+            <div class="modal-content profile-modal">
+                <div class="modal-header">
+                    <h3>Session Profile</h3>
+                    <button class="close-modal" id="closeProfile"><i data-lucide="x"></i></button>
+                </div>
+                <div class="modal-body profile-data">
+                    <div class="profile-item">
+                        <i data-lucide="user" class="item-icon"></i>
+                        <div class="item-text">
+                            <label>Employee Name</label>
+                            <span>ARIF .</span>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <i data-lucide="id-card" class="item-icon"></i>
+                        <div class="item-text">
+                            <label>Employee ID</label>
+                            <span>01074115</span>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <i data-lucide="building-2" class="item-icon"></i>
+                        <div class="item-text">
+                            <label>Company Name</label>
+                            <span>[THIRD] TIONG WOON PROJECT & CONTRACTING PTE. LTD.</span>
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <i data-lucide="server" class="item-icon"></i>
+                        <div class="item-text">
+                            <label>Active Tenant URL</label>
+                            <span class="small-link">https://cloud2.kairossolutions.co/kairostimeentryTCSTHIRD/api/</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIN Modal -->
+        <div class="modal-overlay" id="pinModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <button class="close-modal" id="closePin"><i data-lucide="arrow-left"></i></button>
+                        <h3 style="font-size:16px;">Set your new PIN</h3>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="pin-form">
+                        <div class="input-group">
+                            <i data-lucide="lock"></i>
+                            <input type="password" placeholder="Enter current PIN">
+                            <button class="toggle-password"><i data-lucide="eye"></i></button>
+                        </div>
+                        <div class="input-group">
+                            <i data-lucide="lock"></i>
+                            <input type="password" placeholder="Enter 6 digit PIN">
+                            <button class="toggle-password"><i data-lucide="eye"></i></button>
+                        </div>
+                        <div class="input-group">
+                            <i data-lucide="lock"></i>
+                            <input type="password" placeholder="Confirm PIN">
+                            <button class="toggle-password"><i data-lucide="eye"></i></button>
+                        </div>
+                        <div style="display:flex; justify-content:flex-end; margin-top:10px;">
+                            <button class="save-btn" id="savePin">SAVE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Job List -->
+        <main class="job-list-container">
             <div class="date-navigator">
                 <button class="nav-btn"><i data-lucide="chevron-left"></i></button>
                 <div class="current-date">
@@ -42,26 +132,16 @@
                 </div>
                 <button class="nav-btn"><i data-lucide="chevron-right"></i></button>
             </div>
-
-            <div class="toolbar-actions">
-                <i data-lucide="circle-user"></i>
-                <i data-lucide="lock"></i>
-                <i data-lucide="log-out" onclick="location.href='index.html'" style="cursor:pointer"></i>
-            </div>
-        </header>
-
-        <!-- Job List -->
-        <main class="job-list-container">
             <!-- Job Card 1 -->
             <a href="job-detail.html" class="job-card-link">
-                <div class="job-card red-gradient">
+                <div class="job-card status-new-card">
                     <div class="card-left">
                         <div class="icon-circle"><i data-lucide="truck"></i></div>
                     </div>
                     <div class="card-right">
                         <div class="card-header">
                             <h3>Tuas Power Station</h3>
-                            <span class="job-card-status status-active">In Progress</span>
+                            <span class="job-card-status status-new">New</span>
                         </div>
                         <div class="card-details">
                             <span class="detail-item">#70014S25100801</span>
@@ -79,14 +159,14 @@
 
             <!-- Job Card 2 -->
             <a href="job-detail.html" class="job-card-link">
-                <div class="job-card red-gradient">
+                <div class="job-card status-progress-card">
                     <div class="card-left">
                         <div class="icon-circle"><i data-lucide="ship"></i></div>
                     </div>
                     <div class="card-right">
                         <div class="card-header">
                             <h3>Keppel Shipyard</h3>
-                            <span class="job-card-status status-active">In Progress</span>
+                            <span class="job-card-status status-in-progress">In Progress</span>
                         </div>
                         <div class="card-details">
                             <span class="detail-item">#70014S25100802</span>
@@ -104,14 +184,14 @@
 
             <!-- Job Card 3 -->
             <a href="job-detail.html" class="job-card-link">
-                <div class="job-card current-job">
+                <div class="job-card status-progress-card">
                     <div class="card-left">
                         <div class="icon-circle"><i data-lucide="wrench"></i></div>
                     </div>
                     <div class="card-right">
                         <div class="card-header">
                             <h3>Jurong Island Refin.</h3>
-                            <span class="job-card-status status-active">Active</span>
+                            <span class="job-card-status status-in-progress">In Progress</span>
                         </div>
                         <div class="card-details">
                             <span class="detail-item">#70014S25100803</span>
@@ -129,14 +209,14 @@
 
             <!-- Job Card 4 -->
             <a href="job-detail.html" class="job-card-link">
-                <div class="job-card orange-gradient">
+                <div class="job-card status-complete-card">
                     <div class="card-left">
-                        <div class="icon-circle"><i data-lucide="clock"></i></div>
+                        <div class="icon-circle"><i data-lucide="check-circle"></i></div>
                     </div>
                     <div class="card-right">
                         <div class="card-header">
                             <h3>SemBC Marine Hull</h3>
-                            <span class="job-card-status status-pending">Pending</span>
+                            <span class="job-card-status status-complete">Complete</span>
                         </div>
                         <div class="card-details">
                             <span class="detail-item">#70014S25100804</span>
@@ -151,14 +231,69 @@
                     </div>
                 </div>
             </a>
-        </main>
 
         </main>
     </div>
 
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
+
+        /* Modal Elements */
+        const profileModal = document.getElementById('profileModal');
+        const pinModal = document.getElementById('pinModal');
+        const userProfileBtn = document.getElementById('userProfileBtn');
+        const lockBtn = document.getElementById('lockBtn');
+        
+        const closeProfile = document.getElementById('closeProfile');
+        const closePin = document.getElementById('closePin');
+        const savePin = document.getElementById('savePin');
+
+        /* Toggle Profile */
+        if (userProfileBtn) {
+            userProfileBtn.addEventListener('click', () => profileModal.classList.add('show'));
+        }
+        if (closeProfile) {
+            closeProfile.addEventListener('click', () => profileModal.classList.remove('show'));
+        }
+
+        /* Toggle PIN */
+        if (lockBtn) {
+            lockBtn.addEventListener('click', () => pinModal.classList.add('show'));
+        }
+        if (closePin) {
+            closePin.addEventListener('click', () => pinModal.classList.remove('show'));
+        }
+        if (savePin) {
+            savePin.addEventListener('click', () => {
+                alert('PIN saved successfully!');
+                pinModal.classList.remove('show');
+            });
+        }
+
+        /* Backdrop Click to Close */
+        [profileModal, pinModal].forEach(modal => {
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) modal.classList.remove('show');
+                });
+            }
+        });
+
+        /* Password Toggles */
+        document.querySelectorAll('.toggle-password').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const input = btn.parentElement.querySelector('input');
+                const icon = btn.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.setAttribute('data-lucide', 'eye-off');
+                } else {
+                    input.type = 'password';
+                    icon.setAttribute('data-lucide', 'eye');
+                }
+                lucide.createIcons();
+            });
+        });
     </script>
 </body>
 

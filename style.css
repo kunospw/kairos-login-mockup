@@ -300,64 +300,216 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.02);
 }
 
-.date-navigator {
+/* Toolbar */
+.toolbar {
+    height: 60px;
+    background: linear-gradient(135deg, #C6152A 0%, #A00F21 100%);
     display: flex;
     align-items: center;
-    gap: 15px;
-}
-
-.nav-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: none;
-    background-color: #3B66FF;
+    justify-content: space-between; /* Space profile from actions */
+    padding: 0 20px;
     color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+.user-profile {
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(59, 102, 255, 0.3);
+    gap: 12px;
 }
 
-.nav-btn i {
-    width: 20px;
-    height: 20px;
+.user-profile i {
+    width: 28px;
+    height: 28px;
 }
 
-.current-date {
-    background: white;
-    padding: 8px 15px;
-    border-radius: 8px;
+.user-info-text {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    border: 1px solid #F0F0F0;
+    flex-direction: column;
 }
 
-.current-date i {
-    width: 16px;
-    height: 16px;
-    color: #3B66FF;
+.user-name {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
-.current-date span {
-    font-size: 13px;
-    font-weight: 600;
-    color: #444;
+.user-id {
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.8;
 }
 
 .toolbar-actions {
     display: flex;
     gap: 18px;
-    color: #666;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid #EEE;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #222;
+    font-weight: 700;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.profile-data {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.item-icon {
+    width: 20px !important;
+    height: 20px !important;
+    color: #3B66FF;
+    margin-top: 2px;
+}
+
+.item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-text label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+}
+
+.item-text span {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.4;
+}
+
+.save-btn {
+    background-color: #3B66FF;
+    color: white;
+    border: none;
+    padding: 12px 36px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(59, 102, 255, 0.3);
+    transition: all 0.2s;
+}
+
+.save-btn:active {
+    transform: scale(0.95);
+    background-color: #2D52D1;
+}
+
+.pin-form .input-group {
+    margin-bottom: 12px;
 }
 
 .toolbar-actions i {
     width: 22px;
     height: 22px;
     cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+/* Date Navigator (Moved to Body) */
+.date-navigator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.current-date {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    color: #222;
+    font-size: 16px;
+}
+
+.current-date i {
+    width: 20px;
+    height: 20px;
+    color: #C6152A;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 /* Job List Scroll Area */
@@ -383,7 +535,7 @@ body {
     transform: scale(0.98);
 }
 
-.red-gradient.job-card {
+.job-card {
     background: white;
     border-radius: 12px;
     padding: 16px;
@@ -391,13 +543,14 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     display: flex;
     gap: 16px;
-    border-left: 5px solid transparent;
+    border-left: 12px solid transparent;
     transition: transform 0.2s;
+    overflow: hidden;
 }
 
-.job-card.red-gradient { border-left-color: #C6152A; }
-.job-card.orange-gradient { border-left-color: #E07B20; }
-.job-card.current-job { border-left-color: #1A7AE0; }
+.job-card.status-new-card { border-left-color: #C6152A; background: linear-gradient(90deg, #FFF0F1 0%, #FFFFFF 120px); }
+.job-card.status-progress-card { border-left-color: #E07B20; background: linear-gradient(90deg, #FFF0E6 0%, #FFFFFF 120px); }
+.job-card.status-complete-card { border-left-color: #1A9A2A; background: linear-gradient(90deg, #E6FFE6 0%, #FFFFFF 120px); }
 
 .card-left {
     display: flex;
@@ -471,9 +624,9 @@ body {
     margin-top: 4px;
 }
 
-.status-active { background-color: #E6F4FF; color: #1A7AE0; }
-.status-pending { background-color: #FFF0E6; color: #E07B20; }
-.status-completed { background-color: #E6FFE6; color: #1A9A2A; }
+.status-new { background-color: #FFF0F1; color: #C6152A; }
+.status-in-progress { background-color: #FFF0E6; color: #E07B20; }
+.status-complete { background-color: #E6FFE6; color: #1A9A2A; }
 
 /* FAB */
 .fab {
