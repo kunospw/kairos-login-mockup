@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Detail (Completed) - Kairos Time Entry</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #EBEBEB; }
+
+        .detail-container {
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Red header */
+        .detail-header {
+            background: linear-gradient(135deg, #C6152A 0%, #A00F21 100%);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+        .detail-header a { color: white; display: flex; align-items: center; text-decoration: none; }
+        .detail-header a i { width: 22px; height: 22px; }
+        .detail-header .header-title { flex: 1; display: flex; align-items: center; gap: 8px; }
+        .detail-header .header-title i { width: 20px; height: 20px; color: #FFE066; }
+        .detail-header .header-title span { color: white; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .detail-header .cloud-icon { color: white; }
+        .detail-header .cloud-icon i { width: 22px; height: 22px; }
+
+        /* Scrollable content */
+        .detail-scroll {
+            flex: 1;
+            overflow-y: auto;
+            background-color: #F0F0F0;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .detail-scroll::-webkit-scrollbar { width: 4px; }
+        .detail-scroll::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+
+        /* Info card */
+        .info-card {
+            background: white;
+            border-radius: 14px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid #EEE;
+            padding-bottom: 10px;
+            margin-bottom: 4px;
+        }
+        .info-card-header h2 { font-size: 18px; font-weight: 700; color: #111; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+        .info-card-header h2 span { font-size: 12px; color: #777; font-weight: 500; text-transform: uppercase; }
+
+        .status-badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+        .status-complete { background: #E6FFE6; color: #1A9A2A; }
+
+        .essential-details { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 4px; }
+        .essential-item { background: #F9F9F9; padding: 8px 12px; border-radius: 8px; border: 1px solid #EEE; flex: 1; min-width: 120px; }
+        .essential-item strong { display: block; font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px; }
+        .essential-item span { font-size: 14px; font-weight: 700; color: #222; }
+
+        .hidden-details { display: none; padding-top: 10px; border-top: 1px dashed #DDD; margin-top: 4px; }
+        .hidden-details.show { display: flex; flex-direction: column; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .info-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; }
+        .info-row .label { color: #666; font-weight: 500; }
+        .info-row .value { color: #222; font-weight: 700; text-align: right; max-width: 60%; }
+
+        .more-info-btn {
+            background: #F2F2F2; border: none; padding: 10px; border-radius: 8px;
+            color: #555; font-size: 12px; font-weight: 700; display: flex; align-items: center;
+            justify-content: center; gap: 6px; cursor: pointer; transition: background 0.2s;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .more-info-btn:active { background: #E6E6E6; }
+        .more-info-btn i { width: 14px; height: 14px; }
+
+        /* Time Entries card */
+        .time-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .time-card-header { display: flex; justify-content: space-between; align-items: center; }
+        .time-card-header h2 { font-size: 18px; font-weight: 700; color: #111; margin: 0; display: flex; align-items: center; gap: 8px; }
+        .time-card-header h2 i { color: #C6152A; width: 20px; height: 20px; }
+
+        .time-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+        .time-table th { text-align: left; color: #888; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; padding: 0 8px 12px; border-bottom: 2px solid #EEE; }
+        .time-table td { padding: 14px 8px; border-bottom: 1px solid #F0F0F0; vertical-align: middle; }
+        .time-table tr:last-child td { border-bottom: none; }
+        .time-table .type-cell { width: 80px; }
+
+        .type-chip { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800; text-transform: uppercase; display: inline-block; }
+        .chip-actual { background: #E6FFE6; color: #1A9A2A; border: 1px solid #1A9A2A22; }
+        .chip-break { background: #FFF0F1; color: #C6152A; border: 1px solid #C6152A22; }
+        .chip-billable { background: #E6F4FF; color: #1A7AE0; border: 1px solid #1A7AE022; }
+
+        .time-cell { font-family: 'Outfit', sans-serif; font-weight: 700; color: #222; font-size: 14px; }
+        .time-cell span { color: #999; font-weight: 500; font-size: 11px; margin: 0 4px; }
+        .hours-cell { font-weight: 800; color: #111; text-align: right; }
+        .date-cell { color: #666; font-size: 12px; }
+
+        /* Attachments card */
+        .attach-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+        .attach-card h2 { font-size: 18px; font-weight: 700; color: #111; margin: 0 0 16px; display: flex; align-items: center; gap: 8px; }
+        .attach-card h2 i { width: 20px; height: 20px; color: #C6152A; }
+
+        .signature-preview {
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #F8F8F8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 8px;
+        }
+        .signature-preview img { max-width: 100%; border-radius: 6px; }
+        .sig-label { font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Completed Banner */
+        .complete-banner {
+            background: #F0FFF4;
+            border: 2px solid #1A9A2A;
+            border-radius: 12px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #1A9A2A;
+            font-size: 15px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin: 12px;
+        }
+        .complete-banner i { width: 22px; height: 22px; }
+    </style>
+</head>
+
+<body>
+    <div class="detail-container">
+        <!-- Red Header -->
+        <header class="detail-header">
+            <a href="jobs.html"><i data-lucide="arrow-left"></i></a>
+            <div class="header-title">
+                <i data-lucide="zap"></i>
+                <span>TEST MODE: Job 70014O25...</span>
+            </div>
+            <span class="cloud-icon"><i data-lucide="cloud-off"></i></span>
+        </header>
+
+        <!-- Scrollable Content -->
+        <div class="detail-scroll">
+
+            <!-- Job Info Card -->
+            <div class="info-card">
+                <div class="info-card-header">
+                    <h2>
+                        <span>Project / Job Name</span>
+                        SemBC Marine Hull
+                    </h2>
+                    <span class="status-badge status-complete" style="margin:0">Complete</span>
+                </div>
+
+                <div class="essential-details">
+                    <div class="essential-item">
+                        <strong>Job ID</strong>
+                        <span>#70014S25100804</span>
+                    </div>
+                    <div class="essential-item">
+                        <strong>Operation</strong>
+                        <span>15</span>
+                    </div>
+                    <div class="essential-item">
+                        <strong>Employee</strong>
+                        <span>ARIF .</span>
+                    </div>
+                    <div class="essential-item">
+                        <strong>Phase</strong>
+                        <span>TC1-OPS</span>
+                    </div>
+                </div>
+
+                <div class="hidden-details" id="hiddenDetails">
+                    <div class="info-row"><span class="label">User ID</span><span class="value">01074115</span></div>
+                    <div class="info-row"><span class="label">Labor Hours</span><span class="value">00:01</span></div>
+                    <div class="info-row"><span class="label">Job Type</span><span class="value">FAB</span></div>
+                    <div class="info-row"><span class="label">Start Date</span><span class="value">09-10-2025</span></div>
+                    <div class="info-row"><span class="label">End Date</span><span class="value">09-10-2025</span></div>
+                    <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px">
+                        <span class="label">Company</span>
+                        <span class="value" style="text-align:left; max-width:100%">[THIRD] TIONG WOON PROJECT & CONTRACTING PTE. LTD.</span>
+                    </div>
+                    <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px">
+                        <span class="label">Supervisor</span>
+                        <span class="value" style="text-align:left; max-width:100%">Ahmad Fauzi — ID: 02081887</span>
+                    </div>
+                    <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px">
+                        <span class="label">Location</span>
+                        <span class="value" style="text-align:left; max-width:100%">No Bin Location</span>
+                    </div>
+                </div>
+
+                <button class="more-info-btn" id="toggleInfoBtn">
+                    <i data-lucide="info"></i>
+                    <span>More Job Details</span>
+                </button>
+            </div>
+
+            <!-- Time Entries Card -->
+            <div class="time-card">
+                <div class="time-card-header">
+                    <h2><i data-lucide="history"></i> Time Entries</h2>
+                </div>
+                <table class="time-table">
+                    <thead>
+                        <tr>
+                            <th class="type-cell">Type</th>
+                            <th>Time Range</th>
+                            <th style="text-align:right">Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Actual Row -->
+                        <tr>
+                            <td class="type-cell"><span class="type-chip chip-actual">Actual</span></td>
+                            <td>
+                                <span class="time-cell">08:00 AM <span>&rarr;</span> 08:01 AM</span>
+                                <div class="date-cell">09/10/2025</div>
+                            </td>
+                            <td class="hours-cell">00:01</td>
+                        </tr>
+                        <!-- Break 1 Row -->
+                        <tr>
+                            <td class="type-cell"><span class="type-chip chip-break">Break</span></td>
+                            <td>
+                                <span class="time-cell">08:01 AM <span>&rarr;</span> 08:01 AM</span>
+                                <div class="date-cell">09/10/2025</div>
+                            </td>
+                            <td class="hours-cell">00:00</td>
+                        </tr>
+                        <!-- Break 2 Row -->
+                        <tr>
+                            <td class="type-cell"><span class="type-chip chip-break">Break</span></td>
+                            <td>
+                                <span class="time-cell">08:01 AM <span>&rarr;</span> 08:01 AM</span>
+                                <div class="date-cell">09/10/2025</div>
+                            </td>
+                            <td class="hours-cell">00:00</td>
+                        </tr>
+                        <!-- Billable Row -->
+                        <tr>
+                            <td class="type-cell"><span class="type-chip chip-billable">Billable</span></td>
+                            <td>
+                                <span class="time-cell">08:00 AM <span>&rarr;</span> 08:01 AM</span>
+                                <div class="date-cell">09/10/2025</div>
+                            </td>
+                            <td class="hours-cell">00:01</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Attachments Card -->
+            <div class="attach-card">
+                <h2><i data-lucide="paperclip"></i> Attachments</h2>
+                <div class="signature-preview">
+                    <span class="sig-label">Supervisor Signature</span>
+                    <!-- Placeholder signature visual -->
+                    <svg width="240" height="90" viewBox="0 0 240 90" style="border-radius:6px; background:#fff;">
+                        <rect width="240" height="90" fill="#F8F8F8"/>
+                        <path d="M30 60 Q60 20 90 55 Q120 85 150 40 Q175 10 210 50" stroke="#1A9A2A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+
+        </div><!-- /detail-scroll -->
+
+        <!-- Job Complete Banner (replaces slide buttons) -->
+        <div class="complete-banner">
+            <i data-lucide="check-circle-2"></i>
+            Job Complete — No Time Entry Allowed
+        </div>
+
+    </div><!-- /detail-container -->
+
+    <script>
+        lucide.createIcons();
+
+        /* Info Toggle */
+        const toggleInfoBtn = document.getElementById('toggleInfoBtn');
+        const hiddenDetails = document.getElementById('hiddenDetails');
+
+        toggleInfoBtn.addEventListener('click', () => {
+            const isShowing = hiddenDetails.classList.toggle('show');
+            toggleInfoBtn.querySelector('span').textContent = isShowing ? 'Show Less' : 'More Job Details';
+            toggleInfoBtn.querySelector('i').setAttribute('data-lucide', isShowing ? 'chevron-up' : 'info');
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

@@ -29,9 +29,9 @@
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
         }
 
-        /* Orange header */
+        /* Red header */
         .detail-header {
-            background: linear-gradient(90deg, #E07B20 0%, #D96B10 100%);
+            background: linear-gradient(135deg, #C6152A 0%, #A00F21 100%);
             padding: 18px 20px;
             display: flex;
             align-items: center;
@@ -242,10 +242,6 @@
             height: 14px;
         }
 
-        color: #444;
-        font-weight: 500;
-        }
-
         .info-full:last-child {
             border-bottom: none;
         }
@@ -257,23 +253,23 @@
 
         .status-badge {
             display: inline-block;
-            padding: 3px 10px;
-            border-radius: 20px;
+            padding: 2px 8px;
+            border-radius: 6px;
             font-size: 11px;
             font-weight: 700;
         }
 
-        .status-not-started {
+        .status-new {
+            background: #FFF0F1;
+            color: #C6152A;
+        }
+
+        .status-in-progress {
             background: #FFF0E6;
             color: #E07B20;
         }
 
-        .status-in-progress {
-            background: #E6F4FF;
-            color: #1A7AE0;
-        }
-
-        .status-completed {
+        .status-complete {
             background: #E6FFE6;
             color: #1A9A2A;
         }
@@ -282,150 +278,247 @@
         .time-card {
             background: white;
             border-radius: 14px;
-            padding: 18px 20px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            padding: 20px;
+            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        .time-card h2 {
+        .time-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .time-card-header h2 {
             font-size: 18px;
             font-weight: 700;
-            color: #222;
-            margin-bottom: 14px;
+            color: #111;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .time-card-header h2 i {
+            color: #C6152A;
+            width: 20px;
+            height: 20px;
         }
 
         .no-entries {
             text-align: center;
-            color: #AAA;
+            color: #999;
             font-size: 14px;
-            padding: 10px 0;
-            font-style: italic;
+            padding: 30px 0;
+            background: #FAFAFA;
+            border-radius: 10px;
+            border: 1px dashed #DDD;
         }
 
         .time-table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             font-size: 13px;
         }
 
         .time-table th {
             text-align: left;
-            color: #666;
-            font-weight: 600;
-            padding: 6px 4px 10px;
-            border-bottom: 1px solid #EEE;
+            color: #888;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            padding: 0 8px 12px;
+            border-bottom: 2px solid #EEE;
         }
 
         .time-table td {
-            padding: 10px 4px;
-            border-bottom: 1px solid #F5F5F5;
-            font-weight: 500;
-            color: #333;
+            padding: 14px 8px;
+            border-bottom: 1px solid #F0F0F0;
+            vertical-align: middle;
         }
 
         .time-table tr:last-child td {
             border-bottom: none;
         }
 
-        .row-actual td {
-            background: #F6FFF6;
+        .time-table .type-cell {
+            width: 80px;
         }
 
-        .row-break td {
-            background: #FFF6F6;
-        }
-
-        .type-pill {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 12px;
+        .type-chip {
+            padding: 4px 10px;
+            border-radius: 6px;
             font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .chip-actual {
+            background: #E6FFE6;
+            color: #1A9A2A;
+            border: 1px solid #1A9A2A22;
+        }
+
+        .chip-break {
+            background: #FFF0F1;
+            color: #C6152A;
+            border: 1px solid #C6152A22;
+        }
+
+        .time-cell {
+            font-family: 'Outfit', sans-serif;
             font-weight: 700;
+            color: #222;
+            font-size: 14px;
         }
 
-        .pill-actual {
-            background: #D4F7D4;
-            color: #1A7A1A;
+        .time-cell span {
+            color: #999;
+            font-weight: 500;
+            font-size: 11px;
+            margin: 0 4px;
         }
 
-        .pill-break {
-            background: #FFD4D4;
-            color: #A00F21;
+        .hours-cell {
+            font-weight: 800;
+            color: #111;
+            text-align: right;
+        }
+
+        .date-cell {
+            color: #666;
+            font-size: 12px;
         }
 
         /* Attachments card */
         .attach-card {
             background: white;
             border-radius: 14px;
-            padding: 18px 20px;
+            padding: 20px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        }
-
-        .attach-card h2 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 12px;
-        }
-
-        .no-attach-img {
             display: flex;
-            justify-content: center;
-            padding: 10px 0;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        .no-attach-box {
-            width: 130px;
-            height: 100px;
-            background: linear-gradient(135deg, #7DD8CC 0%, #5BBCB0 100%);
+        .attach-card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .attach-card-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111;
+            margin: 0;
+        }
+
+        .attach-card-header i {
+            width: 20px;
+            height: 20px;
+            color: #C6152A;
+        }
+
+        .no-attach-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 30px 20px;
+            border: 2px dashed #DDD;
             border-radius: 12px;
+            background: #FAFAFA;
+        }
+
+        .no-attach-empty .empty-icon {
+            width: 48px;
+            height: 48px;
+            background: #F0F0F0;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            font-size: 13px;
-            font-weight: 800;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 14px rgba(93, 188, 180, 0.3);
-            gap: 2px;
+            color: #AAA;
+        }
+
+        .no-attach-empty .empty-icon i {
+            width: 24px;
+            height: 24px;
+        }
+
+        .no-attach-empty h4 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 700;
+            color: #444;
+        }
+
+        .no-attach-empty p {
+            margin: 0;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            line-height: 1.5;
         }
 
         /* Bottom slide button zone */
         .slide-zone {
-            background: #E8E8E8;
-            padding: 14px 16px 20px;
+            background: #1A1A1A;
+            padding: 16px 16px 24px;
             display: flex;
             flex-direction: column;
             gap: 10px;
             flex-shrink: 0;
-            border-top: 1px solid #DDD;
         }
 
-        /* Slide button */
+        /* Slide button base */
         .slide-btn-wrap {
             position: relative;
-            height: 60px;
-            background: #B8CCDF;
+            height: 64px;
             border-radius: 40px;
             overflow: hidden;
             user-select: none;
             touch-action: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
+        /* START — Green */
+        .slide-btn-wrap[data-action="start"] {
+            background: linear-gradient(90deg, #0F8A28 0%, #1AAD38 100%);
+        }
+
+        /* BREAK START — Deep Amber */
         .slide-btn-wrap.break-style {
-            background: #B8CCDF;
+            background: linear-gradient(90deg, #B86A00 0%, #E07B20 100%);
         }
 
+        /* BREAK END — Lighter Yellow (on break, tap to end) */
+        .slide-btn-wrap.end-break-style {
+            background: linear-gradient(90deg, #9A7A00 0%, #C4A800 100%);
+        }
+
+        .slide-btn-wrap.end-break-style .slide-thumb i {
+            color: #C4A800;
+        }
+
+        /* END — Red */
         .slide-btn-wrap.end-style {
-            background: #A8BDD0;
+            background: linear-gradient(90deg, #9B0F20 0%, #C6152A 100%);
         }
 
         .slide-btn-wrap.completed {
-            opacity: 0.5;
+            opacity: 0.4;
             pointer-events: none;
         }
 
+        /* Shimmer track text area */
         .slide-track {
             position: absolute;
             left: 0;
@@ -434,64 +527,119 @@
             right: 0;
             display: flex;
             align-items: center;
-            padding-left: 6px;
+            justify-content: center;
+            padding-left: 70px;
         }
 
+        /* Animated chevrons */
+        .slide-label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .slide-label::before,
+        .slide-label::after {
+            content: '›';
+            font-size: 20px;
+            opacity: 0.6;
+            animation: chevronPulse 1.4s ease-in-out infinite;
+        }
+
+        .slide-label::after {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes chevronPulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: translateX(0);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: translateX(4px);
+            }
+        }
+
+        /* Thumb */
         .slide-thumb {
             position: absolute;
             left: 6px;
-            width: 50px;
-            height: 50px;
+            top: 5px;
+            width: 54px;
+            height: 54px;
             background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: grab;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            transition: box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
             z-index: 2;
+            transition: box-shadow 0.2s;
         }
 
         .slide-thumb:active {
             cursor: grabbing;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
         }
 
         .slide-thumb i {
             width: 22px;
             height: 22px;
-            color: #2A9A2A;
         }
 
-        .slide-label {
-            position: absolute;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: white;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            pointer-events: none;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+        /* Thumb icon colors match action */
+        .slide-btn-wrap[data-action="start"] .slide-thumb i {
+            color: #1AAD38;
+        }
+
+        .slide-btn-wrap.break-style .slide-thumb i {
+            color: #E07B20;
+        }
+
+        .slide-btn-wrap.end-style .slide-thumb i {
+            color: #C6152A;
         }
 
         /* Completed session banner */
         .session-complete {
-            background: linear-gradient(90deg, #1A9A2A, #149021);
-            color: white;
+            background: #F0FFF4;
+            color: #1A9A2A;
+            border: 2px solid #1A9A2A;
             border-radius: 12px;
-            padding: 16px;
+            padding: 18px 20px;
             text-align: center;
             font-weight: 700;
             font-size: 15px;
-            box-shadow: 0 4px 16px rgba(26, 154, 42, 0.35);
             display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .session-complete.show {
-            display: block;
+            display: flex;
+        }
+
+        .session-complete i {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
         }
 
         /* Fade-in animation for new rows */
@@ -516,7 +664,7 @@
 <body>
     <div class="detail-container">
 
-        <!-- Orange Header -->
+        <!-- Red Header -->
         <header class="detail-header">
             <a href="jobs.html"><i data-lucide="arrow-left"></i></a>
             <div class="header-title">
@@ -536,7 +684,7 @@
                         <span>Project / Job Name</span>
                         Tuas Power Station
                     </h2>
-                    <span class="status-badge status-not-started" id="statusBadge" style="margin:0">Not Started</span>
+                    <span class="status-badge status-new" id="statusBadge" style="margin:0">Not Started</span>
                 </div>
 
                 <div class="essential-details">
@@ -560,13 +708,17 @@
 
                 <div class="hidden-details" id="hiddenDetails">
                     <div class="info-row"><span class="label">User ID</span> <span class="value">01074115</span></div>
-                    <div class="info-row"><span class="label">Labor Hours</span> <span class="value" id="laborHours">0</span></div>
+                    <div class="info-row"><span class="label">Labor Hours</span> <span class="value"
+                            id="laborHours">0</span></div>
                     <div class="info-row"><span class="label">Job Type</span> <span class="value">MNT</span></div>
-                    <div class="info-row"><span class="label">Start Date</span> <span class="value">08-10-2025</span></div>
-                    <div class="info-row"><span class="label">End Date</span> <span class="value">08-10-2025</span></div>
+                    <div class="info-row"><span class="label">Start Date</span> <span class="value">08-10-2025</span>
+                    </div>
+                    <div class="info-row"><span class="label">End Date</span> <span class="value">08-10-2025</span>
+                    </div>
                     <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px">
                         <span class="label">Company</span>
-                        <span class="value" style="text-align:left; max-width:100%">[THIRD] TIONG WOON PROJECT & CONTRACTING PTE. LTD.</span>
+                        <span class="value" style="text-align:left; max-width:100%">[THIRD] TIONG WOON PROJECT &
+                            CONTRACTING PTE. LTD.</span>
                     </div>
                     <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px;">
                         <span class="label">Location</span>
@@ -581,32 +733,35 @@
             </div>
 
             <!-- Time Entries Card -->
-            <div class="time-card" id="timeEntriesCard">
-                <h2>Time Entries</h2>
-                <p class="no-entries" id="noEntriesMsg">No time entries</p>
-                <table class="time-table" id="timeTable" style="display:none">
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>From</th>
-                            <th>To</th>
-                            <th>Hours</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody id="timeTableBody"></tbody>
-                </table>
+            <div class="time-card">
+                <div class="time-card-header">
+                    <h2><i data-lucide="history"></i> Time Entries</h2>
+                </div>
+                <div id="timeTableWrap">
+                    <div class="no-entries" id="noEntriesMsg">No time entries recorded yet.</div>
+                    <table class="time-table" id="timeTable" style="display:none">
+                        <thead>
+                            <tr>
+                                <th class="type-cell">Type</th>
+                                <th>Time Range</th>
+                                <th style="text-align:right">Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody id="timeTableBody"></tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Attachments Card -->
             <div class="attach-card">
-                <h2>Attachments</h2>
-                <div class="no-attach-img">
-                    <div class="no-attach-box">
-                        <span>NO</span>
-                        <span>ATTACHMENT</span>
-                        <span style="font-size:18px">✏️</span>
-                    </div>
+                <div class="attach-card-header">
+                    <i data-lucide="paperclip"></i>
+                    <h2>Attachments</h2>
+                </div>
+                <div class="no-attach-empty">
+                    <div class="empty-icon"><i data-lucide="file-x"></i></div>
+                    <h4>No Attachments Yet</h4>
+                    <p>Attachments are added on the<br>confirmation page after the job ends.</p>
                 </div>
             </div>
 
@@ -617,7 +772,8 @@
 
             <!-- Session complete banner (hidden until end) -->
             <div class="session-complete" id="sessionComplete">
-                ✅ Session Ended — Job Complete
+                <i data-lucide="check-circle-2"></i>
+                <span id="sessionCompleteText">Session Ended — Job Complete</span>
             </div>
 
             <!-- "Slide To Start" — shown only initially -->
@@ -710,25 +866,31 @@
                 timeTable.style.display = 'none';
                 return;
             }
+
             noEntriesMsg.style.display = 'none';
             timeTable.style.display = 'table';
-
             timeTableBody.innerHTML = '';
-            state.entries.forEach((e, i) => {
+
+            state.entries.forEach(entry => {
                 const tr = document.createElement('tr');
-                tr.className = e.type === 'Actual' ? 'row-actual fade-in' : 'row-break fade-in';
-                const pillClass = e.type === 'Actual' ? 'pill-actual' : 'pill-break';
+                tr.className = `fade-in row-${entry.type.toLowerCase()}`;
+
+                const chipClass = entry.type === 'Break' ? 'chip-break' : 'chip-actual';
+                const timeRange = entry.to
+                    ? `<span class="time-cell">${entry.from}<span>&rarr;</span>${entry.to}</span>`
+                    : `<span class="time-cell">${entry.from}<span>&rarr;</span>...</span>`;
+
                 tr.innerHTML = `
-                <td><span class="type-pill ${pillClass}">${e.type}</span></td>
-                <td>${e.from}</td>
-                <td>${e.to || ''}</td>
-                <td>${e.hours || ''}</td>
-                <td>${e.date}</td>`;
+                    <td class="type-cell"><span class="type-chip ${chipClass}">${entry.type}</span></td>
+                    <td>
+                        ${timeRange}
+                        <div class="date-cell">${entry.date}</div>
+                    </td>
+                    <td class="hours-cell">${entry.hours || '--:--'}</td>
+                `;
                 timeTableBody.appendChild(tr);
             });
-
-            // Auto-scroll the time card into view
-            document.getElementById('timeEntriesCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            lucide.createIcons();
         }
 
         function setStatus(text, cls) {
@@ -805,9 +967,11 @@
             } else if (action === 'startBreak') {
                 // ── BREAK STARTED ──
                 addEntry({ type: 'Break', from: t, to: '', hours: '', date: d });
-                // ✅ Change data-action so next slide reads 'endBreak'
                 btnBreak.dataset.action = 'endBreak';
                 btnBreak.querySelector('.slide-label').textContent = 'Slide To End Break';
+                // Switch to lighter yellow to signal "you are ON break"
+                btnBreak.classList.remove('break-style');
+                btnBreak.classList.add('end-break-style');
                 state.phase = 'breakRunning';
 
             } else if (action === 'endBreak') {
@@ -822,12 +986,13 @@
                 state.breaksDone++;
 
                 if (state.breaksDone >= state.MAX_BREAKS) {
-                    // ✅ Hide break button — max breaks used
                     btnBreak.style.display = 'none';
                 } else {
-                    // Allow another break
+                    // Restore to "Start Break" amber
                     btnBreak.dataset.action = 'startBreak';
                     btnBreak.querySelector('.slide-label').textContent = 'Slide To Start Break';
+                    btnBreak.classList.remove('end-break-style');
+                    btnBreak.classList.add('break-style');
                 }
                 state.phase = 'running';
 
@@ -839,10 +1004,15 @@
                     actualEntry.hours = diffHours(actualEntry.from, t);
                     renderTable();
                 }
-                setStatus('Completed', 'status-completed');
+                setStatus('Completed', 'status-complete');
                 btnBreak.style.display = 'none';
                 btnEnd.style.display = 'none';
+
+                // Show completion banner with total hours
+                const totalHours = actualEntry ? actualEntry.hours : '--:--';
+                document.getElementById('sessionCompleteText').textContent = `Session Ended — Total: ${totalHours} hrs`;
                 sessionComplete.classList.add('show');
+                lucide.createIcons();
                 state.phase = 'ended';
 
                 // Save session data for confirmation page
@@ -850,10 +1020,10 @@
                     entries: state.entries,
                 }));
 
-                // Navigate to confirmation page after a brief moment
+                // Give the worker time to see the final time entry before navigating
                 setTimeout(() => {
                     window.location.href = 'confirm.html';
-                }, 1200);
+                }, 3000);
             }
 
             lucide.createIcons();
