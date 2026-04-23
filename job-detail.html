@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Detail - Kairos Time Entry</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* ── Job Detail page specific styles ── */
+        body {
+            background-color: #EBEBEB;
+        }
+
+        .detail-container {
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Orange header */
+        .detail-header {
+            background: linear-gradient(90deg, #E07B20 0%, #D96B10 100%);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .detail-header a {
+            color: white;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .detail-header a i {
+            width: 22px;
+            height: 22px;
+        }
+
+        .detail-header .header-title {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-header .header-title i {
+            width: 20px;
+            height: 20px;
+            color: #FFE066;
+        }
+
+        .detail-header .header-title span {
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .detail-header .cloud-icon {
+            color: white;
+        }
+
+        .detail-header .cloud-icon i {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* Scrollable content area */
+        .detail-scroll {
+            flex: 1;
+            overflow-y: auto;
+            background-color: #F0F0F0;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .detail-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .detail-scroll::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        /* Info card */
+        .info-card {
+            background: white;
+            border-radius: 14px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #F5F5F5;
+            font-size: 13px;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-row .label {
+            color: #444;
+            font-weight: 500;
+        }
+
+        .info-row .value {
+            color: #222;
+            font-weight: 600;
+            text-align: right;
+            max-width: 55%;
+        }
+
+        .info-full {
+            padding: 6px 0;
+            border-bottom: 1px solid #F5F5F5;
+            font-size: 13px;
+            color: #444;
+            font-weight: 500;
+        }
+
+        .info-full:last-child {
+            border-bottom: none;
+        }
+
+        .info-full .value {
+            color: #222;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .status-not-started {
+            background: #FFF0E6;
+            color: #E07B20;
+        }
+
+        .status-in-progress {
+            background: #E6F4FF;
+            color: #1A7AE0;
+        }
+
+        .status-completed {
+            background: #E6FFE6;
+            color: #1A9A2A;
+        }
+
+        /* Time Entries card */
+        .time-card {
+            background: white;
+            border-radius: 14px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .time-card h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 14px;
+        }
+
+        .no-entries {
+            text-align: center;
+            color: #AAA;
+            font-size: 14px;
+            padding: 10px 0;
+            font-style: italic;
+        }
+
+        .time-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .time-table th {
+            text-align: left;
+            color: #666;
+            font-weight: 600;
+            padding: 6px 4px 10px;
+            border-bottom: 1px solid #EEE;
+        }
+
+        .time-table td {
+            padding: 10px 4px;
+            border-bottom: 1px solid #F5F5F5;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .time-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .row-actual td {
+            background: #F6FFF6;
+        }
+
+        .row-break td {
+            background: #FFF6F6;
+        }
+
+        .type-pill {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .pill-actual {
+            background: #D4F7D4;
+            color: #1A7A1A;
+        }
+
+        .pill-break {
+            background: #FFD4D4;
+            color: #A00F21;
+        }
+
+        /* Attachments card */
+        .attach-card {
+            background: white;
+            border-radius: 14px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .attach-card h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 12px;
+        }
+
+        .no-attach-img {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .no-attach-box {
+            width: 130px;
+            height: 100px;
+            background: linear-gradient(135deg, #7DD8CC 0%, #5BBCB0 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 13px;
+            font-weight: 800;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 14px rgba(93, 188, 180, 0.3);
+            gap: 2px;
+        }
+
+        /* Bottom slide button zone */
+        .slide-zone {
+            background: #E8E8E8;
+            padding: 14px 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-shrink: 0;
+            border-top: 1px solid #DDD;
+        }
+
+        /* Slide button */
+        .slide-btn-wrap {
+            position: relative;
+            height: 60px;
+            background: #B8CCDF;
+            border-radius: 40px;
+            overflow: hidden;
+            user-select: none;
+            touch-action: none;
+        }
+
+        .slide-btn-wrap.break-style {
+            background: #B8CCDF;
+        }
+
+        .slide-btn-wrap.end-style {
+            background: #A8BDD0;
+        }
+
+        .slide-btn-wrap.completed {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .slide-track {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            padding-left: 6px;
+        }
+
+        .slide-thumb {
+            position: absolute;
+            left: 6px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.2s;
+            z-index: 2;
+        }
+
+        .slide-thumb:active {
+            cursor: grabbing;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .slide-thumb i {
+            width: 22px;
+            height: 22px;
+            color: #2A9A2A;
+        }
+
+        .slide-label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Completed session banner */
+        .session-complete {
+            background: linear-gradient(90deg, #1A9A2A, #149021);
+            color: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 4px 16px rgba(26, 154, 42, 0.35);
+            display: none;
+        }
+
+        .session-complete.show {
+            display: block;
+        }
+
+        /* Fade-in animation for new rows */
+        @keyframes fadeInRow {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInRow 0.35s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="detail-container">
+
+        <!-- Orange Header -->
+        <header class="detail-header">
+            <a href="jobs.html"><i data-lucide="arrow-left"></i></a>
+            <div class="header-title">
+                <i data-lucide="zap"></i>
+                <span>TEST MODE: Job PM00...</span>
+            </div>
+            <span class="cloud-icon"><i data-lucide="cloud-off"></i></span>
+        </header>
+
+        <!-- Scrollable Content -->
+        <div class="detail-scroll">
+
+            <!-- Job Info Card -->
+            <div class="info-card">
+                <div class="info-row">
+                    <span class="label">User ID: 01074115</span>
+                    <span class="value">Name: ARIF .</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Labor Hours: 0</span>
+                    <span class="value">
+                        Status: <span class="status-badge status-not-started" id="statusBadge">Not Started</span>
+                    </span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Job #: PM000058</span>
+                    <span class="value">Phase: TC1</span>
+                </div>
+                <div class="info-full">Job Type: <span class="value">MNT</span></div>
+                <div class="info-full">
+                    Location: <span class="value">Jl. Perum Villa Indah Permai Blok H23 No.14, Kecamatan Bekasi Utara
+                        17121, Indonesia</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Start Date: 08-10-2025</span>
+                    <span class="value">End Date: 08-10-2025</span>
+                </div>
+                <div class="info-full">Time Entry Date: <span class="value">08-10-2025</span></div>
+                <div class="info-row">
+                    <span class="label">Supervisor ID: Not found</span>
+                    <span class="value">Supervisor Name: Not fou...</span>
+                </div>
+                <div class="info-full">Company: <span class="value">[THIRD] TIONG WOON PROJECT &amp; CONTRACTING PTE.
+                        LTD.</span></div>
+                <div class="info-full">Location: <span class="value">No Bin Location</span></div>
+            </div>
+
+            <!-- Time Entries Card -->
+            <div class="time-card" id="timeEntriesCard">
+                <h2>Time Entries</h2>
+                <p class="no-entries" id="noEntriesMsg">No time entries</p>
+                <table class="time-table" id="timeTable" style="display:none">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Hours</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timeTableBody"></tbody>
+                </table>
+            </div>
+
+            <!-- Attachments Card -->
+            <div class="attach-card">
+                <h2>Attachments</h2>
+                <div class="no-attach-img">
+                    <div class="no-attach-box">
+                        <span>NO</span>
+                        <span>ATTACHMENT</span>
+                        <span style="font-size:18px">✏️</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /detail-scroll -->
+
+        <!-- Bottom Slide Zone -->
+        <div class="slide-zone" id="slideZone">
+
+            <!-- Session complete banner (hidden until end) -->
+            <div class="session-complete" id="sessionComplete">
+                ✅ Session Ended — Job Complete
+            </div>
+
+            <!-- "Slide To Start" — shown only initially -->
+            <div class="slide-btn-wrap" id="btnStart" data-action="start">
+                <div class="slide-thumb"><i data-lucide="arrow-right-from-line"></i></div>
+                <span class="slide-label">Slide To Start</span>
+            </div>
+
+            <!-- "Slide To Start Break" / "Slide To End Break" — hidden until job started -->
+            <div class="slide-btn-wrap break-style" id="btnBreak" data-action="startBreak" style="display:none">
+                <div class="slide-thumb"><i data-lucide="arrow-right-from-line"></i></div>
+                <span class="slide-label">Slide To Start Break</span>
+            </div>
+
+            <!-- "Slide To End" — hidden until job started -->
+            <div class="slide-btn-wrap end-style" id="btnEnd" data-action="end" style="display:none">
+                <div class="slide-thumb"><i data-lucide="arrow-right-from-line"></i></div>
+                <span class="slide-label">Slide To End</span>
+            </div>
+
+        </div>
+    </div><!-- /detail-container -->
+
+    <script>
+        lucide.createIcons();
+
+        /* ── State ── */
+        const state = {
+            phase: 'idle',      // idle → running → breakRunning → running → (2nd) breakRunning → running → ended
+            breaksDone: 0,
+            MAX_BREAKS: 2,
+            actualRow: null,    // index in entries
+            currentBreakRow: null,
+            entries: [],        // { type, from, to, hours, date }
+        };
+
+        /* ── DOM refs ── */
+        const btnStart = document.getElementById('btnStart');
+        const btnBreak = document.getElementById('btnBreak');
+        const btnEnd = document.getElementById('btnEnd');
+        const noEntriesMsg = document.getElementById('noEntriesMsg');
+        const timeTable = document.getElementById('timeTable');
+        const timeTableBody = document.getElementById('timeTableBody');
+        const statusBadge = document.getElementById('statusBadge');
+        const sessionComplete = document.getElementById('sessionComplete');
+
+        /* ── Helpers ── */
+        function now() {
+            const d = new Date();
+            const h = d.getHours();
+            const m = d.getMinutes();
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            const hh = (h % 12 || 12);
+            const mm = String(m).padStart(2, '0');
+            return `${hh}:${mm} ${ampm}`;
+        }
+        function today() {
+            const d = new Date();
+            const mo = String(d.getMonth() + 1).padStart(2, '0');
+            const da = String(d.getDate()).padStart(2, '0');
+            return `${mo}/${da}/${d.getFullYear()}`;
+        }
+        function diffHours(fromStr, toStr) {
+            const parse = s => {
+                const [time, ampm] = s.split(' ');
+                let [h, m] = time.split(':').map(Number);
+                if (ampm === 'PM' && h !== 12) h += 12;
+                if (ampm === 'AM' && h === 12) h = 0;
+                return h * 60 + m;
+            };
+            const diff = parse(toStr) - parse(fromStr);
+            const hh = String(Math.floor(diff / 60)).padStart(2, '0');
+            const mm = String(diff % 60).padStart(2, '0');
+            return `${hh}:${mm}`;
+        }
+
+        function addEntry(entry) {
+            state.entries.push(entry);
+            renderTable();
+        }
+        function updateLastEntry(fields) {
+            const last = state.entries[state.entries.length - 1];
+            Object.assign(last, fields);
+            renderTable();
+        }
+
+        function renderTable() {
+            if (state.entries.length === 0) {
+                noEntriesMsg.style.display = '';
+                timeTable.style.display = 'none';
+                return;
+            }
+            noEntriesMsg.style.display = 'none';
+            timeTable.style.display = 'table';
+
+            timeTableBody.innerHTML = '';
+            state.entries.forEach((e, i) => {
+                const tr = document.createElement('tr');
+                tr.className = e.type === 'Actual' ? 'row-actual fade-in' : 'row-break fade-in';
+                const pillClass = e.type === 'Actual' ? 'pill-actual' : 'pill-break';
+                tr.innerHTML = `
+                <td><span class="type-pill ${pillClass}">${e.type}</span></td>
+                <td>${e.from}</td>
+                <td>${e.to || ''}</td>
+                <td>${e.hours || ''}</td>
+                <td>${e.date}</td>`;
+                timeTableBody.appendChild(tr);
+            });
+
+            // Auto-scroll the time card into view
+            document.getElementById('timeEntriesCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function setStatus(text, cls) {
+            statusBadge.textContent = text;
+            statusBadge.className = 'status-badge ' + cls;
+        }
+
+        /* ── Slide gesture logic ──
+           Key fix: read wrap.dataset.action LIVE at fire time, not at initSlide() time.
+           This allows btnBreak to toggle between startBreak / endBreak correctly.
+        ── */
+        function initSlide(wrap) {
+            const thumb = wrap.querySelector('.slide-thumb');
+            let startX, currentX, dragging = false;
+            const THRESHOLD = 0.72; // 72% of track width to trigger
+
+            function onDown(e) {
+                if (wrap.style.display === 'none') return;
+                dragging = true;
+                startX = (e.touches ? e.touches[0].clientX : e.clientX);
+                thumb.style.transition = 'none';
+                e.preventDefault();
+            }
+            function onMove(e) {
+                if (!dragging) return;
+                const cx = (e.touches ? e.touches[0].clientX : e.clientX);
+                const dx = Math.max(0, cx - startX);
+                const maxDx = wrap.offsetWidth - thumb.offsetWidth - 12;
+                currentX = Math.min(dx, maxDx);
+                thumb.style.transform = `translateX(${currentX}px)`;
+
+                if (currentX / maxDx >= THRESHOLD) {
+                    dragging = false;
+                    thumb.style.transition = 'transform 0.25s ease';
+                    thumb.style.transform = `translateX(${maxDx}px)`;
+                    // ✅ Read data-action NOW (live), not from closure
+                    const liveAction = wrap.dataset.action;
+                    setTimeout(() => {
+                        thumb.style.transition = 'transform 0.3s ease';
+                        thumb.style.transform = 'translateX(0)';
+                        fireAction(liveAction);
+                    }, 260);
+                }
+            }
+            function onUp() {
+                if (!dragging) return;
+                dragging = false;
+                thumb.style.transition = 'transform 0.3s ease';
+                thumb.style.transform = 'translateX(0)';
+            }
+
+            wrap.addEventListener('mousedown', onDown);
+            wrap.addEventListener('touchstart', onDown, { passive: false });
+            window.addEventListener('mousemove', onMove);
+            window.addEventListener('touchmove', onMove, { passive: false });
+            window.addEventListener('mouseup', onUp);
+            window.addEventListener('touchend', onUp);
+        }
+
+        /* ── Action handler ── */
+        function fireAction(action) {
+            const t = now();
+            const d = today();
+
+            if (action === 'start') {
+                // ── JOB STARTED ──
+                addEntry({ type: 'Actual', from: t, to: '', hours: '', date: d });
+                setStatus('In Progress', 'status-in-progress');
+                btnStart.style.display = 'none';
+                btnBreak.style.display = '';
+                btnEnd.style.display = '';
+                state.phase = 'running';
+
+            } else if (action === 'startBreak') {
+                // ── BREAK STARTED ──
+                addEntry({ type: 'Break', from: t, to: '', hours: '', date: d });
+                // ✅ Change data-action so next slide reads 'endBreak'
+                btnBreak.dataset.action = 'endBreak';
+                btnBreak.querySelector('.slide-label').textContent = 'Slide To End Break';
+                state.phase = 'breakRunning';
+
+            } else if (action === 'endBreak') {
+                // ── BREAK ENDED ──
+                // Find the open break entry (last Break row with no 'to')
+                const breakEntry = [...state.entries].reverse().find(e => e.type === 'Break' && !e.to);
+                if (breakEntry) {
+                    breakEntry.to = t;
+                    breakEntry.hours = diffHours(breakEntry.from, t);
+                    renderTable();
+                }
+                state.breaksDone++;
+
+                if (state.breaksDone >= state.MAX_BREAKS) {
+                    // ✅ Hide break button — max breaks used
+                    btnBreak.style.display = 'none';
+                } else {
+                    // Allow another break
+                    btnBreak.dataset.action = 'startBreak';
+                    btnBreak.querySelector('.slide-label').textContent = 'Slide To Start Break';
+                }
+                state.phase = 'running';
+
+            } else if (action === 'end') {
+                // ── JOB ENDED ──
+                const actualEntry = state.entries.find(e => e.type === 'Actual');
+                if (actualEntry) {
+                    actualEntry.to = t;
+                    actualEntry.hours = diffHours(actualEntry.from, t);
+                    renderTable();
+                }
+                setStatus('Completed', 'status-completed');
+                btnBreak.style.display = 'none';
+                btnEnd.style.display = 'none';
+                sessionComplete.classList.add('show');
+                state.phase = 'ended';
+
+                // Save session data for confirmation page
+                localStorage.setItem('jobSessionData', JSON.stringify({
+                    entries: state.entries,
+                }));
+
+                // Navigate to confirmation page after a brief moment
+                setTimeout(() => {
+                    window.location.href = 'confirm.html';
+                }, 1200);
+            }
+
+            lucide.createIcons();
+        }
+
+        /* ── Boot ── */
+        [btnStart, btnBreak, btnEnd].forEach(initSlide);
+    </script>
+</body>
+
+</html>

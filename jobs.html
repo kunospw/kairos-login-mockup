@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job List - Kairos Time Entry</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        a.job-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a.job-card-link .job-card {
+            cursor: pointer;
+        }
+
+        a.job-card-link .job-card:hover {
+            transform: scale(0.99);
+        }
+    </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="light-body">
+    <div class="app-container">
+        <!-- Top Toolbar -->
+        <header class="toolbar">
+            <div class="date-navigator">
+                <button class="nav-btn"><i data-lucide="chevron-left"></i></button>
+                <div class="current-date">
+                    <i data-lucide="calendar"></i>
+                    <span>08-10-2025</span>
+                </div>
+                <button class="nav-btn"><i data-lucide="chevron-right"></i></button>
+            </div>
+
+            <div class="toolbar-actions">
+                <i data-lucide="circle-user"></i>
+                <i data-lucide="lock"></i>
+                <i data-lucide="log-out" onclick="location.href='index.html'" style="cursor:pointer"></i>
+            </div>
+        </header>
+
+        <!-- Job List -->
+        <main class="job-list-container">
+            <!-- Job Card 1 -->
+            <a href="job-detail.html" class="job-card-link">
+                <div class="job-card red-gradient">
+                    <div class="card-left">
+                        <div class="icon-circle"><i data-lucide="truck"></i></div>
+                    </div>
+                    <div class="card-right">
+                        <div class="card-header">
+                            <h3>Tuas Power Station</h3>
+                            <span class="job-card-status status-active">In Progress</span>
+                        </div>
+                        <div class="card-details">
+                            <span class="detail-item">#70014S25100801</span>
+                            <span class="detail-item">Type: MFG</span>
+                            <span class="detail-item">Emp: ARIF .</span>
+                            <span class="detail-item">Op: 10</span>
+                        </div>
+                        <div class="dates">
+                            <i data-lucide="calendar" style="width:12px;height:12px;"></i>
+                            08/10/2025 | 08:30 AM
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Job Card 2 -->
+            <a href="job-detail.html" class="job-card-link">
+                <div class="job-card red-gradient">
+                    <div class="card-left">
+                        <div class="icon-circle"><i data-lucide="ship"></i></div>
+                    </div>
+                    <div class="card-right">
+                        <div class="card-header">
+                            <h3>Keppel Shipyard</h3>
+                            <span class="job-card-status status-active">In Progress</span>
+                        </div>
+                        <div class="card-details">
+                            <span class="detail-item">#70014S25100802</span>
+                            <span class="detail-item">Type: MFG</span>
+                            <span class="detail-item">Emp: ARIF .</span>
+                            <span class="detail-item">Op: 20</span>
+                        </div>
+                        <div class="dates">
+                            <i data-lucide="calendar" style="width:12px;height:12px;"></i>
+                            08/10/2025 | 09:15 AM
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Job Card 3 -->
+            <a href="job-detail.html" class="job-card-link">
+                <div class="job-card current-job">
+                    <div class="card-left">
+                        <div class="icon-circle"><i data-lucide="wrench"></i></div>
+                    </div>
+                    <div class="card-right">
+                        <div class="card-header">
+                            <h3>Jurong Island Refin.</h3>
+                            <span class="job-card-status status-active">Active</span>
+                        </div>
+                        <div class="card-details">
+                            <span class="detail-item">#70014S25100803</span>
+                            <span class="detail-item">Type: MAINT</span>
+                            <span class="detail-item">Emp: ARIF .</span>
+                            <span class="detail-item">Op: 05</span>
+                        </div>
+                        <div class="dates">
+                            <i data-lucide="calendar" style="width:12px;height:12px;"></i>
+                            08/10/2025 | 10:00 AM
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Job Card 4 -->
+            <a href="job-detail.html" class="job-card-link">
+                <div class="job-card orange-gradient">
+                    <div class="card-left">
+                        <div class="icon-circle"><i data-lucide="clock"></i></div>
+                    </div>
+                    <div class="card-right">
+                        <div class="card-header">
+                            <h3>SemBC Marine Hull</h3>
+                            <span class="job-card-status status-pending">Pending</span>
+                        </div>
+                        <div class="card-details">
+                            <span class="detail-item">#70014S25100804</span>
+                            <span class="detail-item">Type: FAB</span>
+                            <span class="detail-item">Emp: ARIF .</span>
+                            <span class="detail-item">Op: 15</span>
+                        </div>
+                        <div class="dates">
+                            <i data-lucide="calendar" style="width:12px;height:12px;"></i>
+                            09/10/2025 | 08:00 AM
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </main>
+
+        </main>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

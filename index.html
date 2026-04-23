@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Kairos Time Entry</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="login-container">
+        <!-- Top Section -->
+        <div class="header-section">
+            <div class="logo-container">
+                <div class="logo-box">
+                    <span class="twc-text">TWC</span>
+                </div>
+                <div class="company-name">TIONG WOON CORPORATION HOLDING LTD.</div>
+            </div>
+
+            <div class="welcome-text">
+                <span class="sub-title">KAIROS TIME ENTRY</span>
+                <h1>Welcome</h1>
+                <h1 class="red-text">Back.</h1>
+            </div>
+            <div class="red-line"></div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <span class="form-title">SIGN IN TO CONTINUE</span>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <i data-lucide="briefcase"></i>
+                    <input type="text" value="01074115" placeholder="Username">
+                </div>
+
+                <div class="input-group">
+                    <i data-lucide="lock"></i>
+                    <input type="password" id="passwordInput" value="123456" placeholder="Password">
+                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">
+                        <i data-lucide="eye-off" id="eyeIcon"></i>
+                    </button>
+                </div>
+
+                <button type="submit" class="login-button">LOGIN</button>
+            </form>
+
+            <div class="custom-server-toggle" onclick="toggleCustomServer()">
+                <i data-lucide="server"></i>
+                <span>Use custom server</span>
+                <i data-lucide="chevron-up" id="chevronIcon"></i>
+            </div>
+
+            <div class="server-url-box" id="serverBox">
+                <i data-lucide="globe"></i>
+                <input type="text" value="https://cloud2.kairossolutions.co/kairostin" readonly>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-section">
+            <div class="device-id">
+                Device ID: SKQ1.211103.001
+                <i data-lucide="copy" class="copy-icon"></i>
+            </div>
+            <div class="app-version">App Version: 1.0.27</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
