@@ -76,7 +76,16 @@
         .info-card-header h2 { font-size: 18px; font-weight: 700; color: #111; margin: 0; display: flex; flex-direction: column; gap: 2px; }
         .info-card-header h2 span { font-size: 12px; color: #777; font-weight: 500; text-transform: uppercase; }
 
-        .status-badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+        .status-badge { 
+            display: inline-block; 
+            padding: 6px 14px; 
+            border-radius: 20px; 
+            font-size: 13px; 
+            font-weight: 700; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
         .status-complete { background: #E6FFE6; color: #1A9A2A; }
 
         .essential-details { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 4px; }
@@ -197,7 +206,7 @@
                         <span>Project / Job Name</span>
                         SemBC Marine Hull
                     </h2>
-                    <span class="status-badge status-complete" style="margin:0">Complete</span>
+                    <span class="status-badge status-complete">Complete</span>
                 </div>
 
                 <div class="essential-details">
@@ -216,6 +225,14 @@
                     <div class="essential-item">
                         <strong>Phase</strong>
                         <span>TC1-OPS</span>
+                    </div>
+                    <div class="essential-item">
+                        <strong>Supervisor ID</strong>
+                        <span>1013404</span>
+                    </div>
+                    <div class="essential-item">
+                        <strong>Supervisor Name</strong>
+                        <span>ANNIE</span>
                     </div>
                 </div>
 

@@ -87,7 +87,7 @@
             flex: 1;
             overflow-y: auto;
             background-color: #F0F0F0;
-            padding: 12px;
+            padding: 12px 12px 120px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -253,10 +253,13 @@
 
         .status-badge {
             display: inline-block;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .status-new {
@@ -468,25 +471,34 @@
             line-height: 1.5;
         }
 
-        /* Bottom slide button zone */
+        /* Bottom slide button zone — floating over content */
         .slide-zone {
-            background: #1A1A1A;
-            padding: 16px 16px 24px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            padding: 0 8px 20px;
             display: flex;
             flex-direction: column;
             gap: 10px;
-            flex-shrink: 0;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .slide-zone>* {
+            pointer-events: auto;
         }
 
         /* Slide button base */
         .slide-btn-wrap {
             position: relative;
-            height: 64px;
-            border-radius: 40px;
+            height: 84px;
+            border-radius: 42px;
             overflow: hidden;
             user-select: none;
             touch-action: none;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
         }
 
         /* START — Green */
@@ -528,31 +540,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-left: 70px;
         }
 
         /* Animated chevrons */
         .slide-label {
             position: absolute;
+            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
             text-align: center;
             color: rgba(255, 255, 255, 0.95);
             font-size: 14px;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             pointer-events: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
         }
 
         .slide-label::before,
         .slide-label::after {
             content: '›';
-            font-size: 20px;
+            font-size: 28px;
             opacity: 0.6;
             animation: chevronPulse 1.4s ease-in-out infinite;
         }
@@ -579,16 +593,16 @@
         .slide-thumb {
             position: absolute;
             left: 6px;
-            top: 5px;
-            width: 54px;
-            height: 54px;
+            top: 6px;
+            width: 72px;
+            height: 72px;
             background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: grab;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
             z-index: 2;
             transition: box-shadow 0.2s;
         }
@@ -684,7 +698,13 @@
                         <span>Project / Job Name</span>
                         Tuas Power Station
                     </h2>
-                    <span class="status-badge status-new" id="statusBadge" style="margin:0">Not Started</span>
+                    <span class="status-badge status-new" id="statusBadge">Not Started</span>
+                </div>
+
+                <div class="dates"
+                    style="font-size:12px; color:#888; display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+                    <i data-lucide="calendar" style="width:14px; height:14px; color:#C6152A;"></i>
+                    08/10/2025 - 08/10/2025
                 </div>
 
                 <div class="essential-details">
@@ -704,6 +724,14 @@
                         <strong>Phase</strong>
                         <span>TC1-SVC</span>
                     </div>
+                    <div class="essential-item">
+                        <strong>Supervisor ID</strong>
+                        <span>1013404</span>
+                    </div>
+                    <div class="essential-item">
+                        <strong>Supervisor Name</strong>
+                        <span>ANNIE</span>
+                    </div>
                 </div>
 
                 <div class="hidden-details" id="hiddenDetails">
@@ -711,10 +739,7 @@
                     <div class="info-row"><span class="label">Labor Hours</span> <span class="value"
                             id="laborHours">0</span></div>
                     <div class="info-row"><span class="label">Job Type</span> <span class="value">MNT</span></div>
-                    <div class="info-row"><span class="label">Start Date</span> <span class="value">08-10-2025</span>
-                    </div>
-                    <div class="info-row"><span class="label">End Date</span> <span class="value">08-10-2025</span>
-                    </div>
+
                     <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px">
                         <span class="label">Company</span>
                         <span class="value" style="text-align:left; max-width:100%">[THIRD] TIONG WOON PROJECT &

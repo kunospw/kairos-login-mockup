@@ -592,10 +592,13 @@ body {
 }
 
 .job-card-status {
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .card-details {
