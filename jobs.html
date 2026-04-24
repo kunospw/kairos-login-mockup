@@ -11,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700&display=swap"
         rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         a.job-card-link {
             display: block;
@@ -25,13 +26,49 @@
         a.job-card-link .job-card:hover {
             transform: scale(0.99);
         }
+
+        .dev-reset {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            opacity: 0.6;
+            z-index: 999;
+            letter-spacing: 0.5px;
+        }
+
+        .dev-reset:hover {
+            opacity: 1;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #aaa;
+        }
+
+        .empty-state i {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
     </style>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="light-body">
     <div class="app-container">
+
         <!-- Top Toolbar -->
         <header class="toolbar">
             <div class="user-profile" id="userProfileBtn" style="cursor:pointer">
@@ -41,7 +78,6 @@
                     <span class="user-id">01074115</span>
                 </div>
             </div>
-
             <div class="toolbar-actions">
                 <i data-lucide="lock" id="lockBtn" style="cursor:pointer"></i>
                 <i data-lucide="log-out" onclick="location.href='index.html'" style="cursor:pointer"></i>
@@ -58,31 +94,21 @@
                 <div class="modal-body profile-data">
                     <div class="profile-item">
                         <i data-lucide="user" class="item-icon"></i>
-                        <div class="item-text">
-                            <label>Employee Name</label>
-                            <span>ARIF .</span>
-                        </div>
+                        <div class="item-text"><label>Employee Name</label><span>ARIF .</span></div>
                     </div>
                     <div class="profile-item">
                         <i data-lucide="id-card" class="item-icon"></i>
-                        <div class="item-text">
-                            <label>Employee ID</label>
-                            <span>01074115</span>
-                        </div>
+                        <div class="item-text"><label>Employee ID</label><span>01074115</span></div>
                     </div>
                     <div class="profile-item">
                         <i data-lucide="building-2" class="item-icon"></i>
-                        <div class="item-text">
-                            <label>Company Name</label>
-                            <span>[THIRD] TIONG WOON PROJECT & CONTRACTING PTE. LTD.</span>
-                        </div>
+                        <div class="item-text"><label>Company Name</label><span>[THIRD] TIONG WOON PROJECT & CONTRACTING
+                                PTE. LTD.</span></div>
                     </div>
                     <div class="profile-item">
                         <i data-lucide="server" class="item-icon"></i>
-                        <div class="item-text">
-                            <label>Active Tenant URL</label>
-                            <span class="small-link"></span>
-                        </div>
+                        <div class="item-text"><label>Active Tenant URL</label><span class="small-link"
+                                id="tenantUrl"></span></div>
                     </div>
                 </div>
             </div>
@@ -99,21 +125,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="pin-form">
-                        <div class="input-group">
-                            <i data-lucide="lock"></i>
-                            <input type="password" placeholder="Enter current PIN">
-                            <button class="toggle-password"><i data-lucide="eye"></i></button>
-                        </div>
-                        <div class="input-group">
-                            <i data-lucide="lock"></i>
-                            <input type="password" placeholder="Enter 6 digit PIN">
-                            <button class="toggle-password"><i data-lucide="eye"></i></button>
-                        </div>
-                        <div class="input-group">
-                            <i data-lucide="lock"></i>
-                            <input type="password" placeholder="Confirm PIN">
-                            <button class="toggle-password"><i data-lucide="eye"></i></button>
-                        </div>
+                        <div class="input-group"><i data-lucide="lock"></i><input type="password"
+                                placeholder="Enter current PIN"><button class="toggle-password"><i
+                                    data-lucide="eye"></i></button></div>
+                        <div class="input-group"><i data-lucide="lock"></i><input type="password"
+                                placeholder="Enter 6 digit PIN"><button class="toggle-password"><i
+                                    data-lucide="eye"></i></button></div>
+                        <div class="input-group"><i data-lucide="lock"></i><input type="password"
+                                placeholder="Confirm PIN"><button class="toggle-password"><i
+                                    data-lucide="eye"></i></button></div>
                         <div style="display:flex; justify-content:flex-end; margin-top:10px;">
                             <button class="save-btn" id="savePin">SAVE</button>
                         </div>
@@ -128,174 +148,112 @@
                 <button class="nav-btn"><i data-lucide="chevron-left"></i></button>
                 <div class="current-date">
                     <i data-lucide="calendar"></i>
-                    <span>08-10-2025</span>
+                    <span id="currentDateDisplay">08-10-2025</span>
                 </div>
                 <button class="nav-btn"><i data-lucide="chevron-right"></i></button>
             </div>
-            <!-- Job Card 1 -->
-            <a href="job-detail.html" class="job-card-link">
-                <div class="job-card status-new-card">
-                    <div class="card-left">
-                        <div class="icon-circle"><i data-lucide="truck"></i></div>
-                    </div>
-                    <div class="card-right">
-                        <div class="card-header">
-                            <h3>Tuas Power Station</h3>
-                            <span class="job-card-status status-new">New</span>
-                        </div>
-                        <div class="card-details">
-                            <span class="detail-item">#70014S25100801</span>
-                            <span class="detail-item">Type: MFG</span>
-                            <span class="detail-item">Emp: ARIF .</span>
-                            <span class="detail-item">Op: 10</span>
-                        </div>
-                        <div class="dates">
-                            <i data-lucide="calendar" style="width:12px;height:12px;"></i>
-                            08/10/2025 | 08:30 AM
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Job Card 2 -->
-            <a href="job-detail.html" class="job-card-link">
-                <div class="job-card status-progress-card">
-                    <div class="card-left">
-                        <div class="icon-circle"><i data-lucide="ship"></i></div>
-                    </div>
-                    <div class="card-right">
-                        <div class="card-header">
-                            <h3>Keppel Shipyard</h3>
-                            <span class="job-card-status status-in-progress">In Progress</span>
-                        </div>
-                        <div class="card-details">
-                            <span class="detail-item">#70014S25100802</span>
-                            <span class="detail-item">Type: MFG</span>
-                            <span class="detail-item">Emp: ARIF .</span>
-                            <span class="detail-item">Op: 20</span>
-                        </div>
-                        <div class="dates">
-                            <i data-lucide="calendar" style="width:12px;height:12px;"></i>
-                            08/10/2025 | 09:15 AM
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Job Card 3 -->
-            <a href="job-detail.html" class="job-card-link">
-                <div class="job-card status-progress-card">
-                    <div class="card-left">
-                        <div class="icon-circle"><i data-lucide="wrench"></i></div>
-                    </div>
-                    <div class="card-right">
-                        <div class="card-header">
-                            <h3>Jurong Island Refin.</h3>
-                            <span class="job-card-status status-in-progress">In Progress</span>
-                        </div>
-                        <div class="card-details">
-                            <span class="detail-item">#70014S25100803</span>
-                            <span class="detail-item">Type: MAINT</span>
-                            <span class="detail-item">Emp: ARIF .</span>
-                            <span class="detail-item">Op: 05</span>
-                        </div>
-                        <div class="dates">
-                            <i data-lucide="calendar" style="width:12px;height:12px;"></i>
-                            08/10/2025 | 10:00 AM
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Job Card 4 (Complete) -->
-            <a href="job-detail-complete.html" class="job-card-link">
-                <div class="job-card status-complete-card">
-                    <div class="card-left">
-                        <div class="icon-circle"><i data-lucide="check-circle"></i></div>
-                    </div>
-                    <div class="card-right">
-                        <div class="card-header">
-                            <h3>SemBC Marine Hull</h3>
-                            <span class="job-card-status status-complete">Complete</span>
-                        </div>
-                        <div class="card-details">
-                            <span class="detail-item">#70014S25100804</span>
-                            <span class="detail-item">Type: FAB</span>
-                            <span class="detail-item">Emp: ARIF .</span>
-                            <span class="detail-item">Op: 15</span>
-                        </div>
-                        <div class="dates">
-                            <i data-lucide="calendar" style="width:12px;height:12px;"></i>
-                            09/10/2025 | 08:00 AM
-                        </div>
-                    </div>
-                </div>
-            </a>
-
+            <div id="jobListContainer"></div>
         </main>
     </div>
 
+    <!-- Dev Reset -->
+    <button class="dev-reset" onclick="devReset()">↺ Reset DB</button>
+
+    <script src="db.js"></script>
+    <script src="env-theme.js"></script>
     <script>
         lucide.createIcons();
 
-        /* Modal Elements */
+        /* ── Render Job List ── */
+        function statusLabel(s) {
+            if (s === 'new') return { text: 'New', cls: 'status-new', cardCls: 'status-new-card' };
+            if (s === 'in-progress') return { text: 'In Progress', cls: 'status-in-progress', cardCls: 'status-progress-card' };
+            if (s === 'completed') return { text: 'Complete', cls: 'status-complete', cardCls: 'status-complete-card' };
+            return { text: s, cls: '', cardCls: '' };
+        }
+
+        function renderJobs() {
+            const jobs = KairosDB.getJobs();
+            const container = document.getElementById('jobListContainer');
+            container.innerHTML = '';
+
+            if (!jobs.length) {
+                container.innerHTML = `<div class="empty-state"><i data-lucide="inbox"></i><p>No jobs assigned for this date.</p></div>`;
+                lucide.createIcons();
+                return;
+            }
+
+            jobs.forEach(job => {
+                const s = statusLabel(job.status);
+                const detailPage = job.status === 'completed' ? 'job-detail-complete.html' : 'job-detail.html';
+                const el = document.createElement('a');
+                el.className = 'job-card-link';
+                el.href = `${detailPage}?jobId=${job.id}`;
+                el.innerHTML = `
+                <div class="job-card ${s.cardCls}">
+                    <div class="card-left">
+                        <div class="icon-circle"><i data-lucide="${job.icon}"></i></div>
+                    </div>
+                    <div class="card-right">
+                        <div class="card-header">
+                            <h3>${job.projectName}</h3>
+                            <span class="job-card-status ${s.cls}">${s.text}</span>
+                        </div>
+                        <div class="card-details">
+                            <span class="detail-item">#${job.jobNumber}</span>
+                            <span class="detail-item">Type: ${job.type}</span>
+                            <span class="detail-item">Emp: ${job.employee}</span>
+                            <span class="detail-item">Op: ${job.operation}</span>
+                        </div>
+                        <div class="dates">
+                            <i data-lucide="calendar" style="width:12px;height:12px;"></i>
+                            ${job.startDateTime}
+                        </div>
+                    </div>
+                </div>`;
+                container.appendChild(el);
+            });
+
+            lucide.createIcons();
+        }
+
+        renderJobs();
+
+        /* ── Modals ── */
         const profileModal = document.getElementById('profileModal');
         const pinModal = document.getElementById('pinModal');
-        const userProfileBtn = document.getElementById('userProfileBtn');
-        const lockBtn = document.getElementById('lockBtn');
+        document.getElementById('userProfileBtn').addEventListener('click', () => profileModal.classList.add('show'));
+        document.getElementById('closeProfile').addEventListener('click', () => profileModal.classList.remove('show'));
+        document.getElementById('lockBtn').addEventListener('click', () => pinModal.classList.add('show'));
+        document.getElementById('closePin').addEventListener('click', () => pinModal.classList.remove('show'));
+        document.getElementById('savePin').addEventListener('click', () => { alert('PIN saved!'); pinModal.classList.remove('show'); });
 
-        const closeProfile = document.getElementById('closeProfile');
-        const closePin = document.getElementById('closePin');
-        const savePin = document.getElementById('savePin');
+        [profileModal, pinModal].forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); }));
 
-        /* Toggle Profile */
-        if (userProfileBtn) {
-            userProfileBtn.addEventListener('click', () => profileModal.classList.add('show'));
-        }
-        if (closeProfile) {
-            closeProfile.addEventListener('click', () => profileModal.classList.remove('show'));
-        }
-
-        /* Toggle PIN */
-        if (lockBtn) {
-            lockBtn.addEventListener('click', () => pinModal.classList.add('show'));
-        }
-        if (closePin) {
-            closePin.addEventListener('click', () => pinModal.classList.remove('show'));
-        }
-        if (savePin) {
-            savePin.addEventListener('click', () => {
-                alert('PIN saved successfully!');
-                pinModal.classList.remove('show');
-            });
-        }
-
-        /* Backdrop Click to Close */
-        [profileModal, pinModal].forEach(modal => {
-            if (modal) {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) modal.classList.remove('show');
-                });
-            }
-        });
-
-        /* Password Toggles */
         document.querySelectorAll('.toggle-password').forEach(btn => {
             btn.addEventListener('click', () => {
                 const input = btn.parentElement.querySelector('input');
                 const icon = btn.querySelector('i');
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.setAttribute('data-lucide', 'eye-off');
-                } else {
-                    input.type = 'password';
-                    icon.setAttribute('data-lucide', 'eye');
-                }
+                input.type = input.type === 'password' ? 'text' : 'password';
+                icon.setAttribute('data-lucide', input.type === 'password' ? 'eye' : 'eye-off');
                 lucide.createIcons();
             });
         });
+
+        /* ── Tenant URL ── */
+        const envUrls = { third: 'https://cloud2.kairossolutions.co/kairostin', pilot: 'https://pilot.kairossolutions.co/kairostin', production: 'https://cloud.kairossolutions.co/kairostin' };
+        const env = localStorage.getItem('selectedEnv') || 'third';
+        const tenantEl = document.getElementById('tenantUrl');
+        if (tenantEl) tenantEl.textContent = envUrls[env] || envUrls.third;
+
+        /* ── Dev Reset ── */
+        function devReset() {
+            if (confirm('Reset all job data to defaults?')) {
+                KairosDB.resetAll();
+                renderJobs();
+            }
+        }
     </script>
-    <script src="env-theme.js"></script>
 </body>
 
 </html>

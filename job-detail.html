@@ -13,7 +13,6 @@
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* ── Job Detail page specific styles ── */
         body {
             background-color: #EBEBEB;
         }
@@ -29,7 +28,6 @@
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
         }
 
-        /* Red header */
         .detail-header {
             background: linear-gradient(135deg, #C6152A 0%, #A00F21 100%);
             padding: 18px 20px;
@@ -82,7 +80,6 @@
             height: 22px;
         }
 
-        /* Scrollable content area */
         .detail-scroll {
             flex: 1;
             overflow-y: auto;
@@ -102,7 +99,6 @@
             border-radius: 4px;
         }
 
-        /* Info card */
         .info-card {
             background: white;
             border-radius: 14px;
@@ -139,6 +135,14 @@
             text-transform: uppercase;
         }
 
+        #projectName {
+            font-size: 18px;
+            color: #000;
+            font-weight: 700;
+            text-transform: none;
+            margin-top: 2px;
+        }
+
         .info-row {
             display: flex;
             justify-content: space-between;
@@ -158,7 +162,6 @@
             max-width: 60%;
         }
 
-        /* Essential Details - Always Visible */
         .essential-details {
             display: flex;
             flex-wrap: wrap;
@@ -189,7 +192,6 @@
             color: #222;
         }
 
-        /* Hidden Details Section */
         .hidden-details {
             display: none;
             padding-top: 10px;
@@ -206,12 +208,12 @@
         @keyframes slideDown {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateY(-10px)
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0)
             }
         }
 
@@ -242,15 +244,6 @@
             height: 14px;
         }
 
-        .info-full:last-child {
-            border-bottom: none;
-        }
-
-        .info-full .value {
-            color: #222;
-            font-weight: 600;
-        }
-
         .status-badge {
             display: inline-block;
             padding: 6px 14px;
@@ -277,7 +270,6 @@
             color: #1A9A2A;
         }
 
-        /* Time Entries card */
         .time-card {
             background: white;
             border-radius: 14px;
@@ -398,7 +390,6 @@
             font-size: 12px;
         }
 
-        /* Attachments card */
         .attach-card {
             background: white;
             border-radius: 14px;
@@ -471,7 +462,7 @@
             line-height: 1.5;
         }
 
-        /* Bottom slide button zone — floating over content */
+        /* Slide buttons */
         .slide-zone {
             position: absolute;
             bottom: 0;
@@ -490,7 +481,6 @@
             pointer-events: auto;
         }
 
-        /* Slide button base */
         .slide-btn-wrap {
             position: relative;
             height: 84px;
@@ -501,17 +491,14 @@
             box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
         }
 
-        /* START — Green */
         .slide-btn-wrap[data-action="start"] {
             background: linear-gradient(90deg, #0F8A28 0%, #1AAD38 100%);
         }
 
-        /* BREAK START — Deep Amber */
         .slide-btn-wrap.break-style {
             background: linear-gradient(90deg, #B86A00 0%, #E07B20 100%);
         }
 
-        /* BREAK END — Lighter Yellow (on break, tap to end) */
         .slide-btn-wrap.end-break-style {
             background: linear-gradient(90deg, #9A7A00 0%, #C4A800 100%);
         }
@@ -520,29 +507,10 @@
             color: #C4A800;
         }
 
-        /* END — Red */
         .slide-btn-wrap.end-style {
             background: linear-gradient(90deg, #9B0F20 0%, #C6152A 100%);
         }
 
-        .slide-btn-wrap.completed {
-            opacity: 0.4;
-            pointer-events: none;
-        }
-
-        /* Shimmer track text area */
-        .slide-track {
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Animated chevrons */
         .slide-label {
             position: absolute;
             top: 0;
@@ -580,16 +548,15 @@
             0%,
             100% {
                 opacity: 0.3;
-                transform: translateX(0);
+                transform: translateX(0)
             }
 
             50% {
                 opacity: 0.9;
-                transform: translateX(4px);
+                transform: translateX(4px)
             }
         }
 
-        /* Thumb */
         .slide-thumb {
             position: absolute;
             left: 6px;
@@ -617,7 +584,6 @@
             height: 22px;
         }
 
-        /* Thumb icon colors match action */
         .slide-btn-wrap[data-action="start"] .slide-thumb i {
             color: #1AAD38;
         }
@@ -630,7 +596,6 @@
             color: #C6152A;
         }
 
-        /* Completed session banner */
         .session-complete {
             background: #F0FFF4;
             color: #1A9A2A;
@@ -656,21 +621,53 @@
             flex-shrink: 0;
         }
 
-        /* Fade-in animation for new rows */
         @keyframes fadeInRow {
             from {
                 opacity: 0;
-                transform: translateY(-8px);
+                transform: translateY(-8px)
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0)
             }
         }
 
         .fade-in {
             animation: fadeInRow 0.35s ease;
+        }
+
+        /* Live clock badge */
+        .live-clock {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1A9A2A;
+            background: #E6FFE6;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .live-clock .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #1A9A2A;
+            animation: pulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.3
+            }
         }
     </style>
 </head>
@@ -678,17 +675,15 @@
 <body>
     <div class="detail-container">
 
-        <!-- Red Header -->
         <header class="detail-header">
             <a href="jobs.html"><i data-lucide="arrow-left"></i></a>
             <div class="header-title">
                 <i data-lucide="zap"></i>
-                <span>TEST MODE: Job PM00...</span>
+                <span id="headerJobLabel">Loading...</span>
             </div>
             <span class="cloud-icon"><i data-lucide="cloud-off"></i></span>
         </header>
 
-        <!-- Scrollable Content -->
         <div class="detail-scroll">
 
             <!-- Job Info Card -->
@@ -696,58 +691,40 @@
                 <div class="info-card-header">
                     <h2>
                         <span>Project / Job Name</span>
-                        Tuas Power Station
+                        <span id="projectName">—</span>
                     </h2>
                     <span class="status-badge status-new" id="statusBadge">Not Started</span>
                 </div>
 
                 <div class="dates"
-                    style="font-size:12px; color:#888; display:flex; align-items:center; gap:6px; margin-bottom:4px;">
-                    <i data-lucide="calendar" style="width:14px; height:14px; color:#C6152A;"></i>
-                    08/10/2025 - 08/10/2025
+                    style="font-size:12px;color:#888;display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                    <i data-lucide="calendar" style="width:14px;height:14px;color:#C6152A;"></i>
+                    <span id="jobDateRange">—</span>
                 </div>
 
                 <div class="essential-details">
-                    <div class="essential-item">
-                        <strong>Job ID</strong>
-                        <span>PM000058</span>
-                    </div>
-                    <div class="essential-item">
-                        <strong>Operation</strong>
-                        <span>10</span>
-                    </div>
-                    <div class="essential-item">
-                        <strong>Employee</strong>
-                        <span>ARIF .</span>
-                    </div>
-                    <div class="essential-item">
-                        <strong>Phase</strong>
-                        <span>TC1-SVC</span>
-                    </div>
-                    <div class="essential-item">
-                        <strong>Supervisor ID</strong>
-                        <span>1013404</span>
-                    </div>
-                    <div class="essential-item">
-                        <strong>Supervisor Name</strong>
-                        <span>ANNIE</span>
-                    </div>
+                    <div class="essential-item"><strong>Job ID</strong><span id="ei_jobId">—</span></div>
+                    <div class="essential-item"><strong>Operation</strong><span id="ei_operation">—</span></div>
+                    <div class="essential-item"><strong>Employee</strong><span id="ei_employee">—</span></div>
+                    <div class="essential-item"><strong>Phase</strong><span id="ei_phase">—</span></div>
+                    <div class="essential-item"><strong>Supervisor ID</strong><span id="ei_supId">—</span></div>
+                    <div class="essential-item"><strong>Supervisor Name</strong><span id="ei_supName">—</span></div>
                 </div>
 
                 <div class="hidden-details" id="hiddenDetails">
-                    <div class="info-row"><span class="label">User ID</span> <span class="value">01074115</span></div>
-                    <div class="info-row"><span class="label">Labor Hours</span> <span class="value"
-                            id="laborHours">0</span></div>
-                    <div class="info-row"><span class="label">Job Type</span> <span class="value">MNT</span></div>
-
-                    <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px">
-                        <span class="label">Company</span>
-                        <span class="value" style="text-align:left; max-width:100%">[THIRD] TIONG WOON PROJECT &
-                            CONTRACTING PTE. LTD.</span>
+                    <div class="info-row"><span class="label">User ID</span><span class="value" id="hi_userId">—</span>
                     </div>
-                    <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px;">
+                    <div class="info-row"><span class="label">Labor Hours</span><span class="value"
+                            id="hi_laborHours">0</span></div>
+                    <div class="info-row"><span class="label">Job Type</span><span class="value"
+                            id="hi_jobType">—</span></div>
+                    <div class="info-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+                        <span class="label">Company</span>
+                        <span class="value" id="hi_company" style="text-align:left;max-width:100%">—</span>
+                    </div>
+                    <div class="info-row" style="flex-direction:column;align-items:flex-start;gap:4px">
                         <span class="label">Location</span>
-                        <span class="value" style="text-align:left; max-width:100%">No Bin Location</span>
+                        <span class="value" id="hi_location" style="text-align:left;max-width:100%">—</span>
                     </div>
                 </div>
 
@@ -761,6 +738,10 @@
             <div class="time-card">
                 <div class="time-card-header">
                     <h2><i data-lucide="history"></i> Time Entries</h2>
+                    <div class="live-clock" id="liveClock" style="display:none;">
+                        <span class="dot"></span>
+                        <span id="liveClockTime">00:00 AM</span>
+                    </div>
                 </div>
                 <div id="timeTableWrap">
                     <div class="no-entries" id="noEntriesMsg">No time entries recorded yet.</div>
@@ -794,45 +775,61 @@
 
         <!-- Bottom Slide Zone -->
         <div class="slide-zone" id="slideZone">
-
-            <!-- Session complete banner (hidden until end) -->
             <div class="session-complete" id="sessionComplete">
                 <i data-lucide="check-circle-2"></i>
                 <span id="sessionCompleteText">Session Ended — Job Complete</span>
             </div>
-
-            <!-- "Slide To Start" — shown only initially -->
             <div class="slide-btn-wrap" id="btnStart" data-action="start">
                 <div class="slide-thumb"><i data-lucide="arrow-right-from-line"></i></div>
                 <span class="slide-label">Slide To Start</span>
             </div>
-
-            <!-- "Slide To Start Break" / "Slide To End Break" — hidden until job started -->
             <div class="slide-btn-wrap break-style" id="btnBreak" data-action="startBreak" style="display:none">
                 <div class="slide-thumb"><i data-lucide="arrow-right-from-line"></i></div>
                 <span class="slide-label">Slide To Start Break</span>
             </div>
-
-            <!-- "Slide To End" — hidden until job started -->
             <div class="slide-btn-wrap end-style" id="btnEnd" data-action="end" style="display:none">
                 <div class="slide-thumb"><i data-lucide="arrow-right-from-line"></i></div>
                 <span class="slide-label">Slide To End</span>
             </div>
-
         </div>
-    </div><!-- /detail-container -->
 
+    </div>
+
+    <script src="db.js"></script>
     <script>
         lucide.createIcons();
 
+        /* ── Read job from URL ── */
+        const params = new URLSearchParams(location.search);
+        const jobId = params.get('jobId');
+        const job = jobId ? KairosDB.getJobById(jobId) : null;
+
+        if (!job) {
+            document.getElementById('headerJobLabel').textContent = 'Job Not Found';
+        } else {
+            /* ── Populate static fields ── */
+            document.getElementById('headerJobLabel').textContent = `Job ${job.jobNumber.substring(0, 8)}...`;
+            document.getElementById('projectName').textContent = job.projectName;
+            document.getElementById('jobDateRange').textContent = `${job.startDate} - ${job.endDate}`;
+            document.getElementById('ei_jobId').textContent = job.jobNumber;
+            document.getElementById('ei_operation').textContent = job.operation;
+            document.getElementById('ei_employee').textContent = job.employee;
+            document.getElementById('ei_phase').textContent = job.phase;
+            document.getElementById('ei_supId').textContent = job.supervisorId;
+            document.getElementById('ei_supName').textContent = job.supervisorName;
+            document.getElementById('hi_userId').textContent = job.userId;
+            document.getElementById('hi_laborHours').textContent = job.laborHours;
+            document.getElementById('hi_jobType').textContent = job.type;
+            document.getElementById('hi_company').textContent = job.company;
+            document.getElementById('hi_location').textContent = job.location;
+        }
+
         /* ── State ── */
         const state = {
-            phase: 'idle',      // idle → running → breakRunning → running → (2nd) breakRunning → running → ended
+            phase: 'idle',
             breaksDone: 0,
             MAX_BREAKS: 2,
-            actualRow: null,    // index in entries
-            currentBreakRow: null,
-            entries: [],        // { type, from, to, hours, date }
+            entries: [],
         };
 
         /* ── DOM refs ── */
@@ -844,75 +841,81 @@
         const timeTableBody = document.getElementById('timeTableBody');
         const statusBadge = document.getElementById('statusBadge');
         const sessionComplete = document.getElementById('sessionComplete');
+        const liveClock = document.getElementById('liveClock');
+        const liveClockTime = document.getElementById('liveClockTime');
 
-        /* ── Helpers ── */
+        /* ── Time helpers ── */
         function now() {
             const d = new Date();
             const h = d.getHours();
             const m = d.getMinutes();
+            const s = d.getSeconds();
             const ampm = h >= 12 ? 'PM' : 'AM';
-            const hh = (h % 12 || 12);
+            const hh = h % 12 || 12;
             const mm = String(m).padStart(2, '0');
             return `${hh}:${mm} ${ampm}`;
         }
+
+        function nowFull() {
+            const d = new Date();
+            return d.toISOString(); // full ISO for storage
+        }
+
         function today() {
             const d = new Date();
             const mo = String(d.getMonth() + 1).padStart(2, '0');
             const da = String(d.getDate()).padStart(2, '0');
             return `${mo}/${da}/${d.getFullYear()}`;
         }
-        function diffHours(fromStr, toStr) {
-            const parse = s => {
-                const [time, ampm] = s.split(' ');
-                let [h, m] = time.split(':').map(Number);
-                if (ampm === 'PM' && h !== 12) h += 12;
-                if (ampm === 'AM' && h === 12) h = 0;
-                return h * 60 + m;
-            };
-            const diff = parse(toStr) - parse(fromStr);
+
+        function diffHours(fromISO, toISO) {
+            const diff = Math.floor((new Date(toISO) - new Date(fromISO)) / 1000 / 60);
             const hh = String(Math.floor(diff / 60)).padStart(2, '0');
             const mm = String(diff % 60).padStart(2, '0');
             return `${hh}:${mm}`;
         }
 
-        function addEntry(entry) {
-            state.entries.push(entry);
-            renderTable();
-        }
-        function updateLastEntry(fields) {
-            const last = state.entries[state.entries.length - 1];
-            Object.assign(last, fields);
-            renderTable();
+        function formatTime(isoStr) {
+            const d = new Date(isoStr);
+            const h = d.getHours();
+            const m = d.getMinutes();
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            const hh = h % 12 || 12;
+            const mm = String(m).padStart(2, '0');
+            return `${hh}:${mm} ${ampm}`;
         }
 
+        /* ── Live clock ── */
+        let clockInterval = null;
+        function startClock() {
+            liveClock.style.display = 'flex';
+            liveClockTime.textContent = now();
+            clockInterval = setInterval(() => { liveClockTime.textContent = now(); }, 10000);
+        }
+
+        /* ── Table render ── */
         function renderTable() {
-            if (state.entries.length === 0) {
+            if (!state.entries.length) {
                 noEntriesMsg.style.display = '';
                 timeTable.style.display = 'none';
                 return;
             }
-
             noEntriesMsg.style.display = 'none';
             timeTable.style.display = 'table';
             timeTableBody.innerHTML = '';
-
             state.entries.forEach(entry => {
                 const tr = document.createElement('tr');
-                tr.className = `fade-in row-${entry.type.toLowerCase()}`;
-
+                tr.className = 'fade-in';
                 const chipClass = entry.type === 'Break' ? 'chip-break' : 'chip-actual';
-                const timeRange = entry.to
-                    ? `<span class="time-cell">${entry.from}<span>&rarr;</span>${entry.to}</span>`
-                    : `<span class="time-cell">${entry.from}<span>&rarr;</span>...</span>`;
-
+                const fromStr = formatTime(entry.fromISO);
+                const toStr = entry.toISO ? formatTime(entry.toISO) : '...';
                 tr.innerHTML = `
-                    <td class="type-cell"><span class="type-chip ${chipClass}">${entry.type}</span></td>
-                    <td>
-                        ${timeRange}
-                        <div class="date-cell">${entry.date}</div>
-                    </td>
-                    <td class="hours-cell">${entry.hours || '--:--'}</td>
-                `;
+                <td class="type-cell"><span class="type-chip ${chipClass}">${entry.type}</span></td>
+                <td>
+                    <span class="time-cell">${fromStr}<span>&rarr;</span>${toStr}</span>
+                    <div class="date-cell">${entry.date}</div>
+                </td>
+                <td class="hours-cell">${entry.hours || '--:--'}</td>`;
                 timeTableBody.appendChild(tr);
             });
             lucide.createIcons();
@@ -923,35 +926,30 @@
             statusBadge.className = 'status-badge ' + cls;
         }
 
-        /* ── Slide gesture logic ──
-           Key fix: read wrap.dataset.action LIVE at fire time, not at initSlide() time.
-           This allows btnBreak to toggle between startBreak / endBreak correctly.
-        ── */
+        /* ── Slide logic ── */
         function initSlide(wrap) {
             const thumb = wrap.querySelector('.slide-thumb');
-            let startX, currentX, dragging = false;
-            const THRESHOLD = 0.72; // 72% of track width to trigger
+            let startX, dragging = false;
+            const THRESHOLD = 0.72;
 
             function onDown(e) {
                 if (wrap.style.display === 'none') return;
                 dragging = true;
-                startX = (e.touches ? e.touches[0].clientX : e.clientX);
+                startX = e.touches ? e.touches[0].clientX : e.clientX;
                 thumb.style.transition = 'none';
                 e.preventDefault();
             }
             function onMove(e) {
                 if (!dragging) return;
-                const cx = (e.touches ? e.touches[0].clientX : e.clientX);
+                const cx = e.touches ? e.touches[0].clientX : e.clientX;
                 const dx = Math.max(0, cx - startX);
                 const maxDx = wrap.offsetWidth - thumb.offsetWidth - 12;
-                currentX = Math.min(dx, maxDx);
-                thumb.style.transform = `translateX(${currentX}px)`;
-
-                if (currentX / maxDx >= THRESHOLD) {
+                const cur = Math.min(dx, maxDx);
+                thumb.style.transform = `translateX(${cur}px)`;
+                if (cur / maxDx >= THRESHOLD) {
                     dragging = false;
                     thumb.style.transition = 'transform 0.25s ease';
                     thumb.style.transform = `translateX(${maxDx}px)`;
-                    // ✅ Read data-action NOW (live), not from closure
                     const liveAction = wrap.dataset.action;
                     setTimeout(() => {
                         thumb.style.transition = 'transform 0.3s ease';
@@ -966,7 +964,6 @@
                 thumb.style.transition = 'transform 0.3s ease';
                 thumb.style.transform = 'translateX(0)';
             }
-
             wrap.addEventListener('mousedown', onDown);
             wrap.addEventListener('touchstart', onDown, { passive: false });
             window.addEventListener('mousemove', onMove);
@@ -977,43 +974,38 @@
 
         /* ── Action handler ── */
         function fireAction(action) {
-            const t = now();
+            const isoNow = nowFull();
             const d = today();
 
             if (action === 'start') {
-                // ── JOB STARTED ──
-                addEntry({ type: 'Actual', from: t, to: '', hours: '', date: d });
+                state.entries.push({ type: 'Actual', fromISO: isoNow, toISO: null, hours: '', date: d });
                 setStatus('In Progress', 'status-in-progress');
                 btnStart.style.display = 'none';
                 btnBreak.style.display = '';
                 btnEnd.style.display = '';
                 state.phase = 'running';
+                startClock();
+                // Update job status in DB
+                if (job) KairosDB.updateJob(job.id, { status: 'in-progress' });
 
             } else if (action === 'startBreak') {
-                // ── BREAK STARTED ──
-                addEntry({ type: 'Break', from: t, to: '', hours: '', date: d });
+                state.entries.push({ type: 'Break', fromISO: isoNow, toISO: null, hours: '', date: d });
                 btnBreak.dataset.action = 'endBreak';
                 btnBreak.querySelector('.slide-label').textContent = 'Slide To End Break';
-                // Switch to lighter yellow to signal "you are ON break"
                 btnBreak.classList.remove('break-style');
                 btnBreak.classList.add('end-break-style');
                 state.phase = 'breakRunning';
 
             } else if (action === 'endBreak') {
-                // ── BREAK ENDED ──
-                // Find the open break entry (last Break row with no 'to')
-                const breakEntry = [...state.entries].reverse().find(e => e.type === 'Break' && !e.to);
+                const breakEntry = [...state.entries].reverse().find(e => e.type === 'Break' && !e.toISO);
                 if (breakEntry) {
-                    breakEntry.to = t;
-                    breakEntry.hours = diffHours(breakEntry.from, t);
-                    renderTable();
+                    breakEntry.toISO = isoNow;
+                    breakEntry.hours = diffHours(breakEntry.fromISO, isoNow);
                 }
                 state.breaksDone++;
-
                 if (state.breaksDone >= state.MAX_BREAKS) {
                     btnBreak.style.display = 'none';
                 } else {
-                    // Restore to "Start Break" amber
                     btnBreak.dataset.action = 'startBreak';
                     btnBreak.querySelector('.slide-label').textContent = 'Slide To Start Break';
                     btnBreak.classList.remove('end-break-style');
@@ -1022,42 +1014,47 @@
                 state.phase = 'running';
 
             } else if (action === 'end') {
-                // ── JOB ENDED ──
                 const actualEntry = state.entries.find(e => e.type === 'Actual');
                 if (actualEntry) {
-                    actualEntry.to = t;
-                    actualEntry.hours = diffHours(actualEntry.from, t);
-                    renderTable();
+                    actualEntry.toISO = isoNow;
+                    actualEntry.hours = diffHours(actualEntry.fromISO, isoNow);
+                }
+                // Close any open break
+                const openBreak = state.entries.find(e => e.type === 'Break' && !e.toISO);
+                if (openBreak) {
+                    openBreak.toISO = isoNow;
+                    openBreak.hours = diffHours(openBreak.fromISO, isoNow);
                 }
                 setStatus('Completed', 'status-complete');
                 btnBreak.style.display = 'none';
                 btnEnd.style.display = 'none';
+                if (clockInterval) clearInterval(clockInterval);
+                liveClock.style.display = 'none';
 
-                // Show completion banner with total hours
                 const totalHours = actualEntry ? actualEntry.hours : '--:--';
                 document.getElementById('sessionCompleteText').textContent = `Session Ended — Total: ${totalHours} hrs`;
                 sessionComplete.classList.add('show');
-                lucide.createIcons();
                 state.phase = 'ended';
 
-                // Save session data for confirmation page
-                localStorage.setItem('jobSessionData', JSON.stringify({
+                // Save session to DB
+                KairosDB.saveSession({
+                    jobId: job ? job.id : null,
                     entries: state.entries,
-                }));
+                    completedAt: isoNow,
+                });
 
-                // Give the worker time to see the final time entry before navigating
                 setTimeout(() => {
-                    window.location.href = 'confirm.html';
-                }, 3000);
+                    window.location.href = `confirm.html?jobId=${job ? job.id : ''}`;
+                }, 2500);
             }
 
+            renderTable();
             lucide.createIcons();
         }
 
-        /* ── Info Toggle ── */
+        /* ── Info toggle ── */
         const toggleInfoBtn = document.getElementById('toggleInfoBtn');
         const hiddenDetails = document.getElementById('hiddenDetails');
-
         toggleInfoBtn.addEventListener('click', () => {
             const isShowing = hiddenDetails.classList.toggle('show');
             toggleInfoBtn.querySelector('span').textContent = isShowing ? 'Show Less' : 'More Job Details';

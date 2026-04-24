@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { background-color: #EBEBEB; }
+        body {
+            background-color: #EBEBEB;
+        }
 
         .detail-container {
             width: 100%;
@@ -24,7 +28,6 @@
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
         }
 
-        /* Red header */
         .detail-header {
             background: linear-gradient(135deg, #C6152A 0%, #A00F21 100%);
             padding: 18px 20px;
@@ -33,15 +36,50 @@
             gap: 14px;
             flex-shrink: 0;
         }
-        .detail-header a { color: white; display: flex; align-items: center; text-decoration: none; }
-        .detail-header a i { width: 22px; height: 22px; }
-        .detail-header .header-title { flex: 1; display: flex; align-items: center; gap: 8px; }
-        .detail-header .header-title i { width: 20px; height: 20px; color: #FFE066; }
-        .detail-header .header-title span { color: white; font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .detail-header .cloud-icon { color: white; }
-        .detail-header .cloud-icon i { width: 22px; height: 22px; }
 
-        /* Scrollable content */
+        .detail-header a {
+            color: white;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .detail-header a i {
+            width: 22px;
+            height: 22px;
+        }
+
+        .detail-header .header-title {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-header .header-title i {
+            width: 20px;
+            height: 20px;
+            color: #FFE066;
+        }
+
+        .detail-header .header-title span {
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .detail-header .cloud-icon {
+            color: white;
+        }
+
+        .detail-header .cloud-icon i {
+            width: 22px;
+            height: 22px;
+        }
+
         .detail-scroll {
             flex: 1;
             overflow-y: auto;
@@ -51,10 +89,16 @@
             flex-direction: column;
             gap: 12px;
         }
-        .detail-scroll::-webkit-scrollbar { width: 4px; }
-        .detail-scroll::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
 
-        /* Info card */
+        .detail-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .detail-scroll::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
         .info-card {
             background: white;
             border-radius: 14px;
@@ -73,44 +117,150 @@
             padding-bottom: 10px;
             margin-bottom: 4px;
         }
-        .info-card-header h2 { font-size: 18px; font-weight: 700; color: #111; margin: 0; display: flex; flex-direction: column; gap: 2px; }
-        .info-card-header h2 span { font-size: 12px; color: #777; font-weight: 500; text-transform: uppercase; }
 
-        .status-badge { 
-            display: inline-block; 
-            padding: 6px 14px; 
-            border-radius: 20px; 
-            font-size: 13px; 
-            font-weight: 700; 
+        .info-card-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .info-card-header h2 span {
+            font-size: 12px;
+            color: #777;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        #projectName {
+            font-size: 18px;
+            color: #000;
+            font-weight: 700;
+            text-transform: none;
+            margin-top: 2px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
-        .status-complete { background: #E6FFE6; color: #1A9A2A; }
 
-        .essential-details { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 4px; }
-        .essential-item { background: #F9F9F9; padding: 8px 12px; border-radius: 8px; border: 1px solid #EEE; flex: 1; min-width: 120px; }
-        .essential-item strong { display: block; font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px; }
-        .essential-item span { font-size: 14px; font-weight: 700; color: #222; }
+        .status-complete {
+            background: #E6FFE6;
+            color: #1A9A2A;
+        }
 
-        .hidden-details { display: none; padding-top: 10px; border-top: 1px dashed #DDD; margin-top: 4px; }
-        .hidden-details.show { display: flex; flex-direction: column; animation: slideDown 0.3s ease; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .essential-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
 
-        .info-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; }
-        .info-row .label { color: #666; font-weight: 500; }
-        .info-row .value { color: #222; font-weight: 700; text-align: right; max-width: 60%; }
+        .essential-item {
+            background: #F9F9F9;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #EEE;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .essential-item strong {
+            display: block;
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .essential-item span {
+            font-size: 14px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .hidden-details {
+            display: none;
+            padding-top: 10px;
+            border-top: 1px dashed #DDD;
+            margin-top: 4px;
+        }
+
+        .hidden-details.show {
+            display: flex;
+            flex-direction: column;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 13px;
+        }
+
+        .info-row .label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .info-row .value {
+            color: #222;
+            font-weight: 700;
+            text-align: right;
+            max-width: 60%;
+        }
 
         .more-info-btn {
-            background: #F2F2F2; border: none; padding: 10px; border-radius: 8px;
-            color: #555; font-size: 12px; font-weight: 700; display: flex; align-items: center;
-            justify-content: center; gap: 6px; cursor: pointer; transition: background 0.2s;
-            text-transform: uppercase; letter-spacing: 0.5px;
+            background: #F2F2F2;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            color: #555;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .more-info-btn:active { background: #E6E6E6; }
-        .more-info-btn i { width: 14px; height: 14px; }
 
-        /* Time Entries card */
+        .more-info-btn:active {
+            background: #E6E6E6;
+        }
+
+        .more-info-btn i {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Time card */
         .time-card {
             background: white;
             border-radius: 14px;
@@ -120,51 +270,336 @@
             flex-direction: column;
             gap: 16px;
         }
-        .time-card-header { display: flex; justify-content: space-between; align-items: center; }
-        .time-card-header h2 { font-size: 18px; font-weight: 700; color: #111; margin: 0; display: flex; align-items: center; gap: 8px; }
-        .time-card-header h2 i { color: #C6152A; width: 20px; height: 20px; }
 
-        .time-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
-        .time-table th { text-align: left; color: #888; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; padding: 0 8px 12px; border-bottom: 2px solid #EEE; }
-        .time-table td { padding: 14px 8px; border-bottom: 1px solid #F0F0F0; vertical-align: middle; }
-        .time-table tr:last-child td { border-bottom: none; }
-        .time-table .type-cell { width: 80px; }
+        .time-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        .type-chip { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800; text-transform: uppercase; display: inline-block; }
-        .chip-actual { background: #E6FFE6; color: #1A9A2A; border: 1px solid #1A9A2A22; }
-        .chip-break { background: #FFF0F1; color: #C6152A; border: 1px solid #C6152A22; }
-        .chip-billable { background: #E6F4FF; color: #1A7AE0; border: 1px solid #1A7AE022; }
+        .time-card-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-        .time-cell { font-family: 'Outfit', sans-serif; font-weight: 700; color: #222; font-size: 14px; }
-        .time-cell span { color: #999; font-weight: 500; font-size: 11px; margin: 0 4px; }
-        .hours-cell { font-weight: 800; color: #111; text-align: right; }
-        .date-cell { color: #666; font-size: 12px; }
+        .time-card-header h2 i {
+            color: #C6152A;
+            width: 20px;
+            height: 20px;
+        }
 
-        /* Attachments card */
+        .time-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 13px;
+        }
+
+        .time-table th {
+            text-align: left;
+            color: #888;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            padding: 0 8px 12px;
+            border-bottom: 2px solid #EEE;
+        }
+
+        .time-table td {
+            padding: 14px 8px;
+            border-bottom: 1px solid #F0F0F0;
+            vertical-align: middle;
+        }
+
+        .time-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .time-table .type-cell {
+            width: 80px;
+        }
+
+        .type-chip {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .chip-actual {
+            background: #E6FFE6;
+            color: #1A9A2A;
+            border: 1px solid #1A9A2A22;
+        }
+
+        .chip-break {
+            background: #FFF0F1;
+            color: #C6152A;
+            border: 1px solid #C6152A22;
+        }
+
+        .chip-billable {
+            background: #E6F4FF;
+            color: #1A7AE0;
+            border: 1px solid #1A7AE022;
+        }
+
+        .time-cell {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: #222;
+            font-size: 14px;
+        }
+
+        .time-cell span {
+            color: #999;
+            font-weight: 500;
+            font-size: 11px;
+            margin: 0 4px;
+        }
+
+        .hours-cell {
+            font-weight: 800;
+            color: #111;
+            text-align: right;
+        }
+
+        .date-cell {
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* Sign-off summary card */
+        .signoff-card {
+            background: white;
+            border-radius: 14px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .signoff-card h2 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .signoff-card h2 i {
+            width: 16px;
+            height: 16px;
+            color: #C6152A;
+        }
+
+        .signoff-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            font-size: 13px;
+            border-bottom: 1px solid #F5F5F5;
+        }
+
+        .signoff-row:last-child {
+            border-bottom: none;
+        }
+
+        .signoff-row .slabel {
+            color: #777;
+            font-weight: 500;
+        }
+
+        .signoff-row .svalue {
+            color: #222;
+            font-weight: 700;
+            text-align: right;
+            max-width: 65%;
+        }
+
+        .remarks-block {
+            margin-top: 12px;
+            padding: 12px;
+            background: #F9F9F9;
+            border-radius: 8px;
+            border: 1px solid #EEE;
+            font-size: 13px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .remarks-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        /* Attachments */
         .attach-card {
             background: white;
             border-radius: 14px;
             padding: 20px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
         }
-        .attach-card h2 { font-size: 18px; font-weight: 700; color: #111; margin: 0 0 16px; display: flex; align-items: center; gap: 8px; }
-        .attach-card h2 i { width: 20px; height: 20px; color: #C6152A; }
 
-        .signature-preview {
-            border: 2px solid #E0E0E0;
+        .attach-card h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111;
+            margin: 0 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .attach-card h2 i {
+            width: 20px;
+            height: 20px;
+            color: #C6152A;
+        }
+
+        .attach-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .attach-thumb {
+            position: relative;
+            width: 100px;
+            height: 100px;
             border-radius: 10px;
             overflow: hidden;
-            background: #F8F8F8;
+            border: 1.5px solid #E0E0E0;
+            background: #FAFAFA;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .attach-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .attach-thumb .thumb-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.55);
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 3px 0;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .no-attach-empty {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 12px;
             gap: 8px;
+            padding: 24px;
+            border: 2px dashed #DDD;
+            border-radius: 12px;
+            background: #FAFAFA;
+            text-align: center;
         }
-        .signature-preview img { max-width: 100%; border-radius: 6px; }
-        .sig-label { font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* Completed Banner */
+        .no-attach-empty i {
+            width: 28px;
+            height: 28px;
+            color: #CCC;
+        }
+
+        .no-attach-empty p {
+            margin: 0;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Billable summary */
+        .billable-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .billable-item {
+            background: #F9F9F9;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #EEE;
+        }
+
+        .billable-item strong {
+            display: block;
+            font-size: 10px;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .billable-item span {
+            font-size: 14px;
+            font-weight: 700;
+            color: #222;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .meal-badges {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .meal-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .meal-yes {
+            background: #FFF0F1;
+            color: #C6152A;
+        }
+
+        .meal-no {
+            background: #F0F0F0;
+            color: #AAA;
+            text-decoration: line-through;
+        }
+
+        /* Submitted meta */
+        .submitted-meta {
+            font-size: 11px;
+            color: #999;
+            text-align: center;
+            padding: 8px 0 4px;
+        }
+
+        .submitted-meta strong {
+            color: #1A9A2A;
+        }
+
+        /* Complete banner */
         .complete-banner {
             background: #F0FFF4;
             border: 2px solid #1A9A2A;
@@ -180,79 +615,61 @@
             flex-shrink: 0;
             margin: 12px;
         }
-        .complete-banner i { width: 22px; height: 22px; }
+
+        .complete-banner i {
+            width: 22px;
+            height: 22px;
+        }
     </style>
 </head>
 
 <body>
     <div class="detail-container">
-        <!-- Red Header -->
+
         <header class="detail-header">
             <a href="jobs.html"><i data-lucide="arrow-left"></i></a>
             <div class="header-title">
                 <i data-lucide="zap"></i>
-                <span>TEST MODE: Job 70014O25...</span>
+                <span id="headerLabel">Job Complete</span>
             </div>
             <span class="cloud-icon"><i data-lucide="cloud-off"></i></span>
         </header>
 
-        <!-- Scrollable Content -->
-        <div class="detail-scroll">
+        <div class="detail-scroll" id="mainScroll">
 
             <!-- Job Info Card -->
             <div class="info-card">
                 <div class="info-card-header">
                     <h2>
                         <span>Project / Job Name</span>
-                        SemBC Marine Hull
+                        <span id="projectName">—</span>
                     </h2>
                     <span class="status-badge status-complete">Complete</span>
                 </div>
 
                 <div class="essential-details">
-                    <div class="essential-item">
-                        <strong>Job ID</strong>
-                        <span>#70014S25100804</span>
-                    </div>
-                    <div class="essential-item">
-                        <strong>Operation</strong>
-                        <span>15</span>
-                    </div>
-                    <div class="essential-item">
-                        <strong>Employee</strong>
-                        <span>ARIF .</span>
-                    </div>
-                    <div class="essential-item">
-                        <strong>Phase</strong>
-                        <span>TC1-OPS</span>
-                    </div>
-                    <div class="essential-item">
-                        <strong>Supervisor ID</strong>
-                        <span>1013404</span>
-                    </div>
-                    <div class="essential-item">
-                        <strong>Supervisor Name</strong>
-                        <span>ANNIE</span>
-                    </div>
+                    <div class="essential-item"><strong>Job ID</strong><span id="ei_jobId">—</span></div>
+                    <div class="essential-item"><strong>Operation</strong><span id="ei_operation">—</span></div>
+                    <div class="essential-item"><strong>Employee</strong><span id="ei_employee">—</span></div>
+                    <div class="essential-item"><strong>Phase</strong><span id="ei_phase">—</span></div>
+                    <div class="essential-item"><strong>Supervisor ID</strong><span id="ei_supId">—</span></div>
+                    <div class="essential-item"><strong>Supervisor Name</strong><span id="ei_supName">—</span></div>
                 </div>
 
                 <div class="hidden-details" id="hiddenDetails">
-                    <div class="info-row"><span class="label">User ID</span><span class="value">01074115</span></div>
-                    <div class="info-row"><span class="label">Labor Hours</span><span class="value">00:01</span></div>
-                    <div class="info-row"><span class="label">Job Type</span><span class="value">FAB</span></div>
-                    <div class="info-row"><span class="label">Start Date</span><span class="value">09-10-2025</span></div>
-                    <div class="info-row"><span class="label">End Date</span><span class="value">09-10-2025</span></div>
-                    <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px">
+                    <div class="info-row"><span class="label">User ID</span><span class="value" id="hi_userId">—</span>
+                    </div>
+                    <div class="info-row"><span class="label">Labor Hours</span><span class="value"
+                            id="hi_laborHours">—</span></div>
+                    <div class="info-row"><span class="label">Job Type</span><span class="value"
+                            id="hi_jobType">—</span></div>
+                    <div class="info-row" style="flex-direction:column;align-items:flex-start;gap:4px">
                         <span class="label">Company</span>
-                        <span class="value" style="text-align:left; max-width:100%">[THIRD] TIONG WOON PROJECT & CONTRACTING PTE. LTD.</span>
+                        <span class="value" id="hi_company" style="text-align:left;max-width:100%">—</span>
                     </div>
-                    <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px">
-                        <span class="label">Supervisor</span>
-                        <span class="value" style="text-align:left; max-width:100%">Ahmad Fauzi — ID: 02081887</span>
-                    </div>
-                    <div class="info-row" style="flex-direction:column; align-items:flex-start; gap:4px">
+                    <div class="info-row" style="flex-direction:column;align-items:flex-start;gap:4px">
                         <span class="label">Location</span>
-                        <span class="value" style="text-align:left; max-width:100%">No Bin Location</span>
+                        <span class="value" id="hi_location" style="text-align:left;max-width:100%">—</span>
                     </div>
                 </div>
 
@@ -275,77 +692,186 @@
                             <th style="text-align:right">Hours</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Actual Row -->
-                        <tr>
-                            <td class="type-cell"><span class="type-chip chip-actual">Actual</span></td>
-                            <td>
-                                <span class="time-cell">08:00 AM <span>&rarr;</span> 08:01 AM</span>
-                                <div class="date-cell">09/10/2025</div>
-                            </td>
-                            <td class="hours-cell">00:01</td>
-                        </tr>
-                        <!-- Break 1 Row -->
-                        <tr>
-                            <td class="type-cell"><span class="type-chip chip-break">Break</span></td>
-                            <td>
-                                <span class="time-cell">08:01 AM <span>&rarr;</span> 08:01 AM</span>
-                                <div class="date-cell">09/10/2025</div>
-                            </td>
-                            <td class="hours-cell">00:00</td>
-                        </tr>
-                        <!-- Break 2 Row -->
-                        <tr>
-                            <td class="type-cell"><span class="type-chip chip-break">Break</span></td>
-                            <td>
-                                <span class="time-cell">08:01 AM <span>&rarr;</span> 08:01 AM</span>
-                                <div class="date-cell">09/10/2025</div>
-                            </td>
-                            <td class="hours-cell">00:00</td>
-                        </tr>
-                        <!-- Billable Row -->
-                        <tr>
-                            <td class="type-cell"><span class="type-chip chip-billable">Billable</span></td>
-                            <td>
-                                <span class="time-cell">08:00 AM <span>&rarr;</span> 08:01 AM</span>
-                                <div class="date-cell">09/10/2025</div>
-                            </td>
-                            <td class="hours-cell">00:01</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="timeTableBody"></tbody>
                 </table>
+            </div>
+
+            <!-- Billable Summary -->
+            <div class="signoff-card">
+                <h2><i data-lucide="receipt"></i> Billable Summary</h2>
+                <div class="billable-row">
+                    <div class="billable-item"><strong>Start</strong><span id="b_start">—</span></div>
+                    <div class="billable-item"><strong>End</strong><span id="b_end">—</span></div>
+                    <div class="billable-item"><strong>Total</strong><span id="b_total">—</span></div>
+                </div>
+                <div class="meal-badges" id="mealBadges"></div>
+            </div>
+
+            <!-- Sign-off Details -->
+            <div class="signoff-card">
+                <h2><i data-lucide="user-check"></i> Supervisor Sign-off</h2>
+                <div class="signoff-row">
+                    <span class="slabel">Supervisor ID</span>
+                    <span class="svalue" id="so_supId">—</span>
+                </div>
+                <div class="signoff-row">
+                    <span class="slabel">Supervisor Name</span>
+                    <span class="svalue" id="so_supName">—</span>
+                </div>
+                <div class="signoff-row">
+                    <span class="slabel">Submitted At</span>
+                    <span class="svalue" id="so_submittedAt">—</span>
+                </div>
+                <div id="remarksBlock" style="display:none">
+                    <div class="remarks-label" style="margin-top:12px">Remarks / Description</div>
+                    <div class="remarks-block" id="so_description">—</div>
+                </div>
             </div>
 
             <!-- Attachments Card -->
             <div class="attach-card">
                 <h2><i data-lucide="paperclip"></i> Attachments</h2>
-                <div class="signature-preview">
-                    <span class="sig-label">Supervisor Signature</span>
-                    <!-- Placeholder signature visual -->
-                    <svg width="240" height="90" viewBox="0 0 240 90" style="border-radius:6px; background:#fff;">
-                        <rect width="240" height="90" fill="#F8F8F8"/>
-                        <path d="M30 60 Q60 20 90 55 Q120 85 150 40 Q175 10 210 50" stroke="#1A9A2A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                <div class="attach-grid" id="attachGrid">
+                    <div class="no-attach-empty">
+                        <i data-lucide="image-off"></i>
+                        <p>No attachments submitted</p>
+                    </div>
                 </div>
             </div>
 
+            <div class="submitted-meta" id="submittedMeta"></div>
+
         </div><!-- /detail-scroll -->
 
-        <!-- Job Complete Banner (replaces slide buttons) -->
         <div class="complete-banner">
             <i data-lucide="check-circle-2"></i>
             Job Complete — No Time Entry Allowed
         </div>
 
-    </div><!-- /detail-container -->
+    </div>
 
+    <script src="db.js"></script>
     <script>
         lucide.createIcons();
 
-        /* Info Toggle */
+        const params = new URLSearchParams(location.search);
+        const jobId = params.get('jobId');
+
+        // Try submission first, fall back to job data
+        const submission = jobId ? KairosDB.getSubmissionByJobId(jobId) : null;
+        const job = submission ? submission.job : (jobId ? KairosDB.getJobById(jobId) : null);
+        const session = submission ? submission.session : null;
+
+        /* ── Populate Job Info ── */
+        if (job) {
+            document.getElementById('headerLabel').textContent = `Job ${job.jobNumber ? job.jobNumber.substring(0, 8) : ''}...`;
+            document.getElementById('projectName').textContent = job.projectName;
+            document.getElementById('ei_jobId').textContent = job.jobNumber;
+            document.getElementById('ei_operation').textContent = job.operation;
+            document.getElementById('ei_employee').textContent = job.employee;
+            document.getElementById('ei_phase').textContent = job.phase;
+            document.getElementById('ei_supId').textContent = job.supervisorId;
+            document.getElementById('ei_supName').textContent = job.supervisorName;
+            document.getElementById('hi_userId').textContent = job.userId;
+            document.getElementById('hi_laborHours').textContent = job.laborHours || '—';
+            document.getElementById('hi_jobType').textContent = job.type;
+            document.getElementById('hi_company').textContent = job.company;
+            document.getElementById('hi_location').textContent = job.location;
+        }
+
+        /* ── Time helpers ── */
+        function formatTime(isoStr) {
+            if (!isoStr) return '—';
+            const d = new Date(isoStr);
+            const h = d.getHours(), m = d.getMinutes();
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            return `${(h % 12 || 12)}:${String(m).padStart(2, '0')} ${ampm}`;
+        }
+        function formatDate(isoStr) {
+            if (!isoStr) return '—';
+            const d = new Date(isoStr);
+            const mo = String(d.getMonth() + 1).padStart(2, '0');
+            const da = String(d.getDate()).padStart(2, '0');
+            return `${mo}/${da}/${d.getFullYear()}`;
+        }
+        function formatDateTime(isoStr) {
+            if (!isoStr) return '—';
+            return `${formatDate(isoStr)}, ${formatTime(isoStr)}`;
+        }
+
+        /* ── Time Entries Table ── */
+        if (session && session.entries) {
+            const tbody = document.getElementById('timeTableBody');
+            session.entries.forEach(e => {
+                const tr = document.createElement('tr');
+                const chipCls = e.type === 'Break' ? 'chip-break' : e.type === 'Billable' ? 'chip-billable' : 'chip-actual';
+                const fromStr = formatTime(e.fromISO);
+                const toStr = formatTime(e.toISO);
+                const dateStr = formatDate(e.fromISO);
+                tr.innerHTML = `
+                <td class="type-cell"><span class="type-chip ${chipCls}">${e.type}</span></td>
+                <td>
+                    <span class="time-cell">${fromStr}<span>&rarr;</span>${toStr}</span>
+                    <div class="date-cell">${dateStr}</div>
+                </td>
+                <td class="hours-cell">${e.hours || '--:--'}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        /* ── Billable ── */
+        if (submission && submission.billable) {
+            const b = submission.billable;
+            document.getElementById('b_start').textContent = b.startTime || '—';
+            document.getElementById('b_end').textContent = b.endTime || '—';
+            document.getElementById('b_total').textContent = b.totalHours || '—';
+        }
+        if (submission && submission.signOff) {
+            const s = submission.signOff;
+            const mealBadges = document.getElementById('mealBadges');
+            if (s.noLunch || s.noDinner) {
+                if (s.noLunch) { const b = document.createElement('span'); b.className = 'meal-badge meal-yes'; b.textContent = 'No Lunch'; mealBadges.appendChild(b); }
+                if (s.noDinner) { const b = document.createElement('span'); b.className = 'meal-badge meal-yes'; b.textContent = 'No Dinner'; mealBadges.appendChild(b); }
+            }
+        }
+
+        /* ── Sign-off ── */
+        if (submission && submission.signOff) {
+            const so = submission.signOff;
+            document.getElementById('so_supId').textContent = so.supervisorId || '—';
+            document.getElementById('so_supName').textContent = so.supervisorName || '—';
+            document.getElementById('so_submittedAt').textContent = formatDateTime(submission.submittedAt);
+            if (so.description && so.description.trim()) {
+                document.getElementById('so_description').textContent = so.description;
+                document.getElementById('remarksBlock').style.display = '';
+            }
+        }
+
+        /* ── Attachments ── */
+        if (submission && submission.attachments && submission.attachments.length) {
+            const grid = document.getElementById('attachGrid');
+            grid.innerHTML = '';
+            let sigCount = 0, photoCount = 0;
+            submission.attachments.forEach(a => {
+                const isS = a.type === 'signature';
+                isS ? sigCount++ : photoCount++;
+                const label = isS ? `Sig #${sigCount}` : `Photo #${photoCount}`;
+                const div = document.createElement('div');
+                div.className = 'attach-thumb';
+                div.innerHTML = `<img src="${a.dataUrl}" alt="${a.type}"><span class="thumb-label">${label}</span>`;
+                grid.appendChild(div);
+            });
+        }
+
+        /* ── Submitted Meta ── */
+        if (submission) {
+            const meta = document.getElementById('submittedMeta');
+            meta.innerHTML = `Submitted <strong>${formatDateTime(submission.submittedAt)}</strong>`;
+        }
+
+        /* ── Info Toggle ── */
         const toggleInfoBtn = document.getElementById('toggleInfoBtn');
         const hiddenDetails = document.getElementById('hiddenDetails');
-
         toggleInfoBtn.addEventListener('click', () => {
             const isShowing = hiddenDetails.classList.toggle('show');
             toggleInfoBtn.querySelector('span').textContent = isShowing ? 'Show Less' : 'More Job Details';
@@ -355,4 +881,5 @@
     </script>
     <script src="env-theme.js"></script>
 </body>
+
 </html>
