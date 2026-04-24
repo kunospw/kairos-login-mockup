@@ -5,62 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Kairos Time Entry</title>
-    <style>
-        /* Environment Selector */
-        .env-selector {
-            display: flex;
-            justify-content: center;
-            gap: 0;
-            margin-bottom: 18px;
-            background: #F0F0F0;
-            border-radius: 10px;
-            padding: 3px;
-            position: relative;
-        }
-        .env-pill {
-            flex: 1;
-            text-align: center;
-            padding: 9px 0;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            border-radius: 8px;
-            color: #888;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-            user-select: none;
-        }
-        .env-pill.active {
-            color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-        }
-        .env-pill:not(.active):hover {
-            color: #555;
-        }
-    </style>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700&display=swap"
         rel="stylesheet">
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
     <div class="login-container">
-        <!-- Top Section -->
         <div class="header-section">
             <div class="logo-container">
-                <div class="logo-box">
-                    <span class="twc-text">TWC</span>
-                </div>
+                <div class="logo-box"><span class="twc-text">TWC</span></div>
                 <div class="company-name">TIONG WOON CORPORATION HOLDING LTD.</div>
             </div>
-
             <div class="welcome-text">
                 <span class="sub-title">KAIROS TIME ENTRY</span>
                 <h1>Welcome</h1>
@@ -68,24 +28,19 @@
             </div>
             <div class="red-line"></div>
         </div>
-
-        <!-- Form Section -->
         <div class="form-section">
-            <!-- Environment Selector -->
             <div class="env-selector" id="envSelector">
-                <div class="env-pill active" data-env="third" style="background:linear-gradient(135deg,#C6152A,#A00F21);">THIRD</div>
+                <div class="env-pill active" data-env="third"
+                    style="background:linear-gradient(135deg,#C6152A,#A00F21);">THIRD</div>
                 <div class="env-pill" data-env="pilot">PILOT</div>
                 <div class="env-pill" data-env="production">PRODUCTION</div>
             </div>
-
             <span class="form-title">SIGN IN TO CONTINUE</span>
-
             <form id="loginForm">
                 <div class="input-group">
                     <i data-lucide="briefcase"></i>
                     <input type="text" value="01074115" placeholder="Username">
                 </div>
-
                 <div class="input-group">
                     <i data-lucide="lock"></i>
                     <input type="password" id="passwordInput" value="123456" placeholder="Password">
@@ -93,121 +48,51 @@
                         <i data-lucide="eye-off" id="eyeIcon"></i>
                     </button>
                 </div>
-
                 <button type="submit" class="login-button">LOGIN</button>
             </form>
-
             <div class="custom-server-toggle" onclick="toggleCustomServer()">
                 <i data-lucide="server"></i>
                 <span>Use custom server</span>
                 <i data-lucide="chevron-up" id="chevronIcon"></i>
             </div>
-
             <div class="server-url-box" id="serverBox">
                 <i data-lucide="globe"></i>
                 <input type="text" value="https://cloud2.kairossolutions.co/kairostin" readonly>
             </div>
         </div>
-
-        <!-- Footer -->
         <div class="footer-section">
-            <div class="device-id">
-                Device ID: SKQ1.211103.001
-                <i data-lucide="copy" class="copy-icon"></i>
-            </div>
+            <div class="device-id">Device ID: SKQ1.211103.001<i data-lucide="copy" class="copy-icon"></i></div>
             <div class="app-version">App Version: 1.0.27</div>
         </div>
     </div>
-
     <script src="script.js"></script>
     <script>
         lucide.createIcons();
-
-        /* ── Environment Theme Config ── */
         const envConfig = {
-            third: {
-                label: 'THIRD ENVIRONMENT',
-                gradient: 'linear-gradient(135deg, #C6152A 0%, #A00F21 100%)',
-                bannerBg: '#C6152A',
-                accentColor: '#C6152A',
-                glowColor: 'rgba(198, 21, 42, 0.2)',
-                shadowColor: 'rgba(198, 21, 42, 0.3)',
-                serverUrl: 'https://cloud2.kairossolutions.co/kairostin'
-            },
-            pilot: {
-                label: 'PILOT ENVIRONMENT',
-                gradient: 'linear-gradient(135deg, #E07B20 0%, #C06010 100%)',
-                bannerBg: '#E07B20',
-                accentColor: '#E07B20',
-                glowColor: 'rgba(224, 123, 32, 0.2)',
-                shadowColor: 'rgba(224, 123, 32, 0.3)',
-                serverUrl: 'https://pilot.kairossolutions.co/kairostin'
-            },
-            production: {
-                label: 'PRODUCTION',
-                gradient: 'linear-gradient(135deg, #1A9A2A 0%, #14771F 100%)',
-                bannerBg: '#1A9A2A',
-                accentColor: '#1A9A2A',
-                glowColor: 'rgba(26, 154, 42, 0.2)',
-                shadowColor: 'rgba(26, 154, 42, 0.3)',
-                serverUrl: 'https://cloud.kairossolutions.co/kairostin'
-            }
+            third: { gradient: 'linear-gradient(135deg,#C6152A 0%,#A00F21 100%)', accentColor: '#C6152A', glowColor: 'rgba(198,21,42,0.2)', shadowColor: 'rgba(198,21,42,0.3)', serverUrl: 'https://cloud2.kairossolutions.co/kairostin' },
+            pilot: { gradient: 'linear-gradient(135deg,#E07B20 0%,#C06010 100%)', accentColor: '#E07B20', glowColor: 'rgba(224,123,32,0.2)', shadowColor: 'rgba(224,123,32,0.3)', serverUrl: 'https://pilot.kairossolutions.co/kairostin' },
+            production: { gradient: 'linear-gradient(135deg,#1A9A2A 0%,#14771F 100%)', accentColor: '#1A9A2A', glowColor: 'rgba(26,154,42,0.2)', shadowColor: 'rgba(26,154,42,0.3)', serverUrl: 'https://cloud.kairossolutions.co/kairostin' }
         };
-
         let currentEnv = localStorage.getItem('selectedEnv') || 'third';
-
         function applyEnv(env) {
-            currentEnv = env;
-            localStorage.setItem('selectedEnv', env);
+            currentEnv = env; localStorage.setItem('selectedEnv', env);
             const cfg = envConfig[env];
-
-            // Pills
             document.querySelectorAll('.env-pill').forEach(pill => {
-                if (pill.dataset.env === env) {
-                    pill.classList.add('active');
-                    pill.style.background = cfg.gradient;
-                } else {
-                    pill.classList.remove('active');
-                    pill.style.background = 'none';
-                }
+                if (pill.dataset.env === env) { pill.classList.add('active'); pill.style.background = cfg.gradient; }
+                else { pill.classList.remove('active'); pill.style.background = 'none'; }
             });
-
-            // Login button
             const loginBtn = document.querySelector('.login-button');
-            if (loginBtn) {
-                loginBtn.style.background = cfg.gradient;
-                loginBtn.style.boxShadow = '0 10px 20px ' + cfg.shadowColor;
-            }
-
-            // Red line
+            if (loginBtn) { loginBtn.style.background = cfg.gradient; loginBtn.style.boxShadow = '0 10px 20px ' + cfg.shadowColor; }
             const redLine = document.querySelector('.red-line');
             if (redLine) redLine.style.backgroundColor = cfg.accentColor;
-
-            // Header glow
-            const headerSection = document.querySelector('.header-section');
-            if (headerSection) {
-                headerSection.style.setProperty('--glow-color', cfg.glowColor);
-            }
-
-            // Welcome text accent
             const redText = document.querySelector('.red-text');
             if (redText) redText.style.color = cfg.accentColor;
-
-            // TWC box accent
             const twcText = document.querySelector('.twc-text');
             if (twcText) twcText.style.color = cfg.accentColor;
-
-            // Server URL
             const serverInput = document.querySelector('.server-url-box input');
             if (serverInput) serverInput.value = cfg.serverUrl;
         }
-
-        // Pill click handlers
-        document.querySelectorAll('.env-pill').forEach(pill => {
-            pill.addEventListener('click', () => applyEnv(pill.dataset.env));
-        });
-
-        // Apply saved env on load
+        document.querySelectorAll('.env-pill').forEach(pill => pill.addEventListener('click', () => applyEnv(pill.dataset.env)));
         applyEnv(currentEnv);
     </script>
 </body>

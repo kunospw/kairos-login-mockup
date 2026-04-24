@@ -28,7 +28,6 @@
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
         }
 
-        /* Red header */
         .confirm-header {
             background: linear-gradient(135deg, #C6152A 0%, #A00F21 100%);
             padding: 18px 20px;
@@ -85,7 +84,6 @@
             height: 22px;
         }
 
-        /* Scrollable content */
         .confirm-scroll {
             flex: 1;
             overflow-y: auto;
@@ -105,7 +103,6 @@
             border-radius: 4px;
         }
 
-        /* Shared card */
         .card {
             background: white;
             border-radius: 14px;
@@ -131,7 +128,6 @@
             color: #C6152A;
         }
 
-        /* Form group */
         .form-group {
             margin-bottom: 16px;
         }
@@ -194,7 +190,6 @@
             padding-right: 36px;
         }
 
-        /* Checkbox grid */
         .checkbox-group {
             display: flex;
             gap: 20px;
@@ -221,7 +216,6 @@
             color: #444;
         }
 
-        /* Company info text */
         .company-info-text {
             font-size: 13px;
             color: #333;
@@ -244,12 +238,64 @@
             margin-bottom: 0;
         }
 
-        /* Grid row */
         .row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
             margin-bottom: 12px;
+        }
+
+        /* Time entries table inside confirm */
+        .entries-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 13px;
+        }
+
+        .entries-table th {
+            text-align: left;
+            color: #888;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            padding: 0 8px 10px;
+            border-bottom: 2px solid #EEE;
+        }
+
+        .entries-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #F0F0F0;
+            vertical-align: middle;
+        }
+
+        .entries-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .type-chip {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .chip-actual {
+            background: #E6FFE6;
+            color: #1A9A2A;
+        }
+
+        .chip-break {
+            background: #FFF0F1;
+            color: #C6152A;
+        }
+
+        .chip-billable {
+            background: #E6F4FF;
+            color: #1A7AE0;
         }
 
         /* Attachments */
@@ -297,9 +343,11 @@
             color: #C6152A;
         }
 
-        .attach-add-btn i { width: 15px; height: 15px; }
+        .attach-add-btn i {
+            width: 15px;
+            height: 15px;
+        }
 
-        /* Attachment thumbnails grid */
         .attach-grid {
             display: flex;
             flex-wrap: wrap;
@@ -316,7 +364,7 @@
             overflow: hidden;
             border: 1.5px solid #E0E0E0;
             background: #FAFAFA;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         .attach-thumb img {
@@ -330,7 +378,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0,0,0,0.55);
+            background: rgba(0, 0, 0, 0.55);
             color: white;
             font-size: 9px;
             font-weight: 600;
@@ -347,7 +395,7 @@
             width: 22px;
             height: 22px;
             border-radius: 50%;
-            background: rgba(198,21,42,0.9);
+            background: rgba(198, 21, 42, 0.9);
             color: white;
             border: none;
             cursor: pointer;
@@ -357,13 +405,14 @@
             font-size: 13px;
             font-weight: 700;
             line-height: 1;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
         }
 
-        .attach-thumb .thumb-remove:hover { background: #A00F21; }
+        .attach-thumb .thumb-remove:hover {
+            background: #A00F21;
+        }
 
-        /* Modal & UI Elements */
-        /* (Inherited from prev version for consistency) */
+        /* Signature modal */
         .sig-overlay {
             position: fixed;
             inset: 0;
@@ -431,8 +480,9 @@
             color: #666;
         }
 
-        /* Hidden file inputs */
-        .hidden-input { display: none; }
+        .hidden-input {
+            display: none;
+        }
 
         .submit-section {
             padding: 16px;
@@ -476,13 +526,25 @@
         .toast.show {
             transform: translateX(-50%) translateY(0);
         }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            background: #E6FFE6;
+            color: #1A9A2A;
+        }
     </style>
 </head>
 
 <body>
     <div class="confirm-container">
 
-        <!-- Red Header -->
         <header class="confirm-header">
             <button class="back-btn" onclick="history.back()"><i data-lucide="arrow-left"></i></button>
             <div class="header-title">
@@ -492,84 +554,54 @@
             <span class="cloud-icon"><i data-lucide="cloud-off"></i></span>
         </header>
 
-        <!-- Scrollable Form -->
         <div class="confirm-scroll">
 
-            <!-- Job & Company Details Card -->
+            <!-- Job & Company Details -->
             <div class="card">
                 <h2><i data-lucide="info"></i> Job & Company Details</h2>
                 <div class="company-info-text">
                     <div class="row-2">
-                        <div class="info-block">
-                            <strong>User ID</strong>
-                            01074115
-                        </div>
-                        <div class="info-block">
-                            <strong>Name</strong>
-                            ARIF .
-                        </div>
+                        <div class="info-block"><strong>User ID</strong><span id="c_userId">—</span></div>
+                        <div class="info-block"><strong>Name</strong><span id="c_name">—</span></div>
                     </div>
                     <div class="row-2">
-                        <div class="info-block">
-                            <strong>Labor Hours</strong>
-                            0
-                        </div>
-                        <div class="info-block">
-                            <strong>Status</strong>
-                            <span class="status-badge"
-                                style="background:#E6FFE6; color:#1A9A2A; padding:6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">Completed</span>
-                        </div>
+                        <div class="info-block"><strong>Labor Hours</strong><span id="c_laborHours">0</span></div>
+                        <div class="info-block"><strong>Status</strong><span class="status-badge">Completed</span></div>
                     </div>
                     <div class="row-2">
-                        <div class="info-block">
-                            <strong>Job #</strong>
-                            70014S25100801
-                        </div>
-                        <div class="info-block">
-                            <strong>Phase</strong>
-                            TC1-SVC
-                        </div>
+                        <div class="info-block"><strong>Job #</strong><span id="c_jobNumber">—</span></div>
+                        <div class="info-block"><strong>Phase</strong><span id="c_phase">—</span></div>
                     </div>
                     <div class="row-2">
-                        <div class="info-block">
-                            <strong>Supervisor ID</strong>
-                            1013404
-                        </div>
-                        <div class="info-block">
-                            <strong>Supervisor Name</strong>
-                            ANNIE
-                        </div>
+                        <div class="info-block"><strong>Supervisor ID</strong><span id="c_supId">—</span></div>
+                        <div class="info-block"><strong>Supervisor Name</strong><span id="c_supName">—</span></div>
                     </div>
-                    <div class="info-block">
-                        <strong>Job Type</strong>
-                        MFG
-                    </div>
+                    <div class="info-block"><strong>Job Type</strong><span id="c_jobType">—</span></div>
                     <div class="row-2">
-                        <div class="info-block">
-                            <strong>Start Date</strong>
-                            08-10-2025
-                        </div>
-                        <div class="info-block">
-                            <strong>End Date</strong>
-                            08-10-2025
-                        </div>
+                        <div class="info-block"><strong>Start Date</strong><span id="c_startDate">—</span></div>
+                        <div class="info-block"><strong>End Date</strong><span id="c_endDate">—</span></div>
                     </div>
-                    <div class="info-block">
-                        <strong>Time Entry Date</strong>
-                        08-10-2025
-                    </div>
-                    <div class="info-block">
-                        <strong>Company</strong>
-                        [THIRD] TIONG WOON PROJECT & CONTRACTING PTE. LTD.
-                    </div>
-                    <div class="info-block">
-                        <strong>Location</strong>
-                        No Bin Location
-                    </div>
+                    <div class="info-block"><strong>Company</strong><span id="c_company">—</span></div>
+                    <div class="info-block"><strong>Location</strong><span id="c_location">—</span></div>
                 </div>
             </div>
 
-            <!-- Billable Details Card -->
+            <!-- Time Entries Summary -->
+            <div class="card">
+                <h2><i data-lucide="clock"></i> Time Entries</h2>
+                <table class="entries-table" id="entriesTable">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>From → To</th>
+                            <th style="text-align:right">Hrs</th>
+                        </tr>
+                    </thead>
+                    <tbody id="entriesBody"></tbody>
+                </table>
+            </div>
+
+            <!-- Billable Details -->
             <div class="card">
                 <h2><i data-lucide="receipt"></i> Billable Details</h2>
                 <div class="row-2">
@@ -582,27 +614,19 @@
                         <input type="text" id="endTime" disabled>
                     </div>
                 </div>
-
                 <div class="checkbox-group">
-                    <label class="checkbox-item">
-                        <input type="checkbox" id="noLunch">
-                        <span>No Lunch</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" id="noDinner">
-                        <span>No Dinner</span>
-                    </label>
+                    <label class="checkbox-item"><input type="checkbox" id="noLunch"><span>No Lunch</span></label>
+                    <label class="checkbox-item"><input type="checkbox" id="noDinner"><span>No Dinner</span></label>
                 </div>
-
                 <div class="form-group">
                     <label>Total Billed Hours</label>
                     <input type="text" id="totalHours" disabled>
                 </div>
             </div>
 
-            <!-- Supervisor Details Card -->
+            <!-- Supervisor Sign-off -->
             <div class="card">
-                <h2><i data-lucide="user-check"></i> Supervisor Details</h2>
+                <h2><i data-lucide="user-check"></i> Supervisor Sign-off</h2>
                 <div class="form-group">
                     <label>Supervisor ID</label>
                     <select id="supervisorId">
@@ -617,26 +641,20 @@
                     <input type="text" id="supervisorName" disabled placeholder="Select ID above">
                 </div>
                 <div class="form-group">
-                    <label>Description</label>
+                    <label>Description / Remarks</label>
                     <textarea id="description" placeholder="Describe work performed..."></textarea>
                 </div>
             </div>
 
-            <!-- Attachment Card -->
+            <!-- Attachments -->
             <div class="card">
                 <h2><i data-lucide="paperclip"></i> Attachments</h2>
                 <div class="attach-zone disabled" id="attachZone">
                     <p class="attach-label-msg" id="attachMsg">Select Supervisor to unlock attachments</p>
                     <div class="attach-btn-row">
-                        <button class="attach-add-btn" id="addSigBtn">
-                            <i data-lucide="pen-tool"></i> Signature
-                        </button>
-                        <button class="attach-add-btn" id="addPhotoBtn">
-                            <i data-lucide="image"></i> Upload
-                        </button>
-                        <button class="attach-add-btn" id="addCameraBtn">
-                            <i data-lucide="camera"></i> Camera
-                        </button>
+                        <button class="attach-add-btn" id="addSigBtn"><i data-lucide="pen-tool"></i> Signature</button>
+                        <button class="attach-add-btn" id="addPhotoBtn"><i data-lucide="image"></i> Upload</button>
+                        <button class="attach-add-btn" id="addCameraBtn"><i data-lucide="camera"></i> Camera</button>
                     </div>
                     <div class="attach-grid" id="attachGrid"></div>
                 </div>
@@ -646,17 +664,16 @@
 
         </div><!-- /confirm-scroll -->
 
-        <!-- Submit Button -->
         <div class="submit-section">
             <button class="submit-btn" id="submitBtn">SUBMIT</button>
         </div>
 
-    </div><!-- /confirm-container -->
+    </div>
 
-    <!-- Signature Modal & Toast (Same as before) -->
+    <!-- Signature Modal -->
     <div class="sig-overlay" id="sigOverlay">
         <div class="sig-modal">
-            <h3><i data-lucide="pen-tool"></i> Signature</h3>
+            <h3 style="margin-bottom:14px;font-size:16px;font-weight:700;">Draw Signature</h3>
             <div class="sig-canvas-wrap"><canvas id="sigCanvas"></canvas></div>
             <div class="sig-actions">
                 <button class="btn-cancel-sig" id="cancelSigBtn">Cancel</button>
@@ -665,44 +682,88 @@
             </div>
         </div>
     </div>
+
     <div class="toast" id="toast">✅ Job submitted successfully!</div>
 
+    <script src="db.js"></script>
     <script>
         lucide.createIcons();
 
-        /* ── Read session data ── */
-        const sessionData = JSON.parse(localStorage.getItem('jobSessionData') || '{}');
-        const entries = sessionData.entries || [];
-        const actual = entries.find(e => e.type === 'Actual');
+        /* ── Load job & session ── */
+        const params = new URLSearchParams(location.search);
+        const jobId = params.get('jobId');
+        const job = jobId ? KairosDB.getJobById(jobId) : null;
+        const session = KairosDB.getSession();
 
-        if (actual) {
-            document.getElementById('startTime').value = actual.from;
-            document.getElementById('endTime').value = actual.to;
-            document.getElementById('totalHours').value = actual.hours;
+        /* ── Helpers ── */
+        function formatTime(isoStr) {
+            if (!isoStr) return '—';
+            const d = new Date(isoStr);
+            const h = d.getHours(), m = d.getMinutes();
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            return `${(h % 12 || 12)}:${String(m).padStart(2, '0')} ${ampm}`;
         }
 
-        /* ── Supervisor logic ── */
+        /* ── Populate Job Details ── */
+        if (job) {
+            document.getElementById('c_userId').textContent = job.userId;
+            document.getElementById('c_name').textContent = job.employee;
+            document.getElementById('c_jobNumber').textContent = job.jobNumber;
+            document.getElementById('c_phase').textContent = job.phase;
+            document.getElementById('c_supId').textContent = job.supervisorId;
+            document.getElementById('c_supName').textContent = job.supervisorName;
+            document.getElementById('c_jobType').textContent = job.type;
+            document.getElementById('c_startDate').textContent = job.startDate;
+            document.getElementById('c_endDate').textContent = job.endDate;
+            document.getElementById('c_company').textContent = job.company;
+            document.getElementById('c_location').textContent = job.location;
+        }
+
+        /* ── Populate Time Entries & Billable ── */
+        if (session && session.entries) {
+            const entries = session.entries;
+            const tbody = document.getElementById('entriesBody');
+            entries.forEach(e => {
+                const tr = document.createElement('tr');
+                const chipCls = e.type === 'Break' ? 'chip-break' : e.type === 'Billable' ? 'chip-billable' : 'chip-actual';
+                tr.innerHTML = `
+                <td><span class="type-chip ${chipCls}">${e.type}</span></td>
+                <td style="font-size:12px">${formatTime(e.fromISO)} → ${formatTime(e.toISO)}</td>
+                <td style="text-align:right;font-weight:700">${e.hours || '--:--'}</td>`;
+                tbody.appendChild(tr);
+            });
+
+            const actualEntry = entries.find(e => e.type === 'Actual');
+            if (actualEntry) {
+                document.getElementById('startTime').value = formatTime(actualEntry.fromISO);
+                document.getElementById('endTime').value = formatTime(actualEntry.toISO);
+                document.getElementById('totalHours').value = actualEntry.hours || '—';
+                document.getElementById('c_laborHours').textContent = actualEntry.hours || '0';
+            }
+        }
+
+        /* ── Supervisor ── */
         const supervisorMap = { 'SUP001': 'Ahmad Razak', 'SUP002': 'David Tan', 'SUP003': 'Michael Lim' };
         const supervisorSelect = document.getElementById('supervisorId');
-        const supervisorName = document.getElementById('supervisorName');
+        const supervisorNameInput = document.getElementById('supervisorName');
         const attachZone = document.getElementById('attachZone');
         const attachMsg = document.getElementById('attachMsg');
 
         supervisorSelect.addEventListener('change', () => {
             const val = supervisorSelect.value;
             if (val) {
-                supervisorName.value = supervisorMap[val] || '';
+                supervisorNameInput.value = supervisorMap[val] || '';
                 attachZone.classList.remove('disabled');
                 attachMsg.textContent = 'Add signatures or photos below';
             } else {
-                supervisorName.value = '';
+                supervisorNameInput.value = '';
                 attachZone.classList.add('disabled');
                 attachMsg.textContent = 'Select Supervisor to unlock attachments';
             }
         });
 
-        /* ── Attachments state ── */
-        let attachments = []; // { id, type:'signature'|'photo', dataUrl }
+        /* ── Attachments ── */
+        let attachments = [];
         let attachIdCounter = 0;
         const attachGrid = document.getElementById('attachGrid');
 
@@ -718,14 +779,13 @@
 
         function renderAttachments() {
             attachGrid.innerHTML = '';
-            const sigCount = attachments.filter(a => a.type === 'signature').length;
-            const photoCount = attachments.filter(a => a.type === 'photo').length;
-            attachments.forEach((a, i) => {
+            let sigCount = 0, photoCount = 0;
+            attachments.forEach(a => {
+                const isS = a.type === 'signature';
+                isS ? sigCount++ : photoCount++;
+                const label = isS ? `Sig #${sigCount}` : `Photo #${photoCount}`;
                 const div = document.createElement('div');
                 div.className = 'attach-thumb';
-                const label = a.type === 'signature'
-                    ? 'Sig #' + (attachments.filter((x,j) => x.type==='signature' && j<=i).length)
-                    : 'Photo #' + (attachments.filter((x,j) => x.type==='photo' && j<=i).length);
                 div.innerHTML = `<img src="${a.dataUrl}" alt="${a.type}"><span class="thumb-label">${label}</span><button class="thumb-remove" data-id="${a.id}">&times;</button>`;
                 attachGrid.appendChild(div);
             });
@@ -735,7 +795,7 @@
             lucide.createIcons();
         }
 
-        /* ── Signature Canvas logic ── */
+        /* ── Signature Canvas ── */
         const sigOverlay = document.getElementById('sigOverlay');
         const sigCanvas = document.getElementById('sigCanvas');
         const ctx = sigCanvas.getContext('2d');
@@ -745,9 +805,15 @@
         document.getElementById('cancelSigBtn').onclick = () => { sigOverlay.classList.remove('open'); ctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height); };
         document.getElementById('clearSigBtn').onclick = () => ctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
 
-        function resizeCanvas() { sigCanvas.width = sigCanvas.parentElement.clientWidth; sigCanvas.height = sigCanvas.parentElement.clientHeight; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#222'; }
-        function getPos(e) { const r = sigCanvas.getBoundingClientRect(); return { x: (e.touches ? e.touches[0].clientX : e.clientX) - r.left, y: (e.touches ? e.touches[0].clientY : e.clientY) - r.top }; }
-
+        function resizeCanvas() {
+            sigCanvas.width = sigCanvas.parentElement.clientWidth;
+            sigCanvas.height = sigCanvas.parentElement.clientHeight;
+            ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#222';
+        }
+        function getPos(e) {
+            const r = sigCanvas.getBoundingClientRect();
+            return { x: (e.touches ? e.touches[0].clientX : e.clientX) - r.left, y: (e.touches ? e.touches[0].clientY : e.clientY) - r.top };
+        }
         sigCanvas.onmousedown = sigCanvas.ontouchstart = (e) => { if (e.touches) e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); };
         sigCanvas.onmousemove = sigCanvas.ontouchmove = (e) => { if (!drawing) return; if (e.touches) e.preventDefault(); const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); };
         sigCanvas.onmouseup = sigCanvas.ontouchend = () => drawing = false;
@@ -758,10 +824,9 @@
             sigOverlay.classList.remove('open');
         };
 
-        /* ── Photo Upload logic ── */
+        /* ── Photo Upload ── */
         const photoInput = document.getElementById('photoInput');
         const cameraInput = document.getElementById('cameraInput');
-
         document.getElementById('addPhotoBtn').onclick = () => photoInput.click();
         document.getElementById('addCameraBtn').onclick = () => cameraInput.click();
 
@@ -773,20 +838,52 @@
                 reader.readAsDataURL(file);
             });
         }
-
         photoInput.addEventListener('change', (e) => { handleFiles(e.target.files); e.target.value = ''; });
         cameraInput.addEventListener('change', (e) => { handleFiles(e.target.files); e.target.value = ''; });
 
-        /* ── Submit logic ── */
+        /* ── Submit ── */
         document.getElementById('submitBtn').onclick = function () {
-            if (!supervisorSelect.value) return supervisorSelect.focus();
+            if (!supervisorSelect.value) { supervisorSelect.focus(); return; }
+
             this.textContent = 'SUBMITTING...';
             this.disabled = true;
+
             setTimeout(() => {
+                // Build submission object
+                const submission = {
+                    jobId: jobId,
+                    submittedAt: new Date().toISOString(),
+                    job: job ? { ...job } : null,
+                    session: session,
+                    signOff: {
+                        supervisorId: supervisorSelect.value,
+                        supervisorName: supervisorNameInput.value,
+                        description: document.getElementById('description').value,
+                        noLunch: document.getElementById('noLunch').checked,
+                        noDinner: document.getElementById('noDinner').checked,
+                    },
+                    attachments: attachments, // includes base64 dataUrls
+                    billable: {
+                        startTime: document.getElementById('startTime').value,
+                        endTime: document.getElementById('endTime').value,
+                        totalHours: document.getElementById('totalHours').value,
+                    },
+                };
+
+                // Save submission to DB
+                KairosDB.saveSubmission(submission);
+
+                // Update job status to completed
+                if (job) {
+                    KairosDB.updateJob(job.id, { status: 'completed', laborHours: (session && session.entries) ? (session.entries.find(e => e.type === 'Actual') || {}).hours || 0 : 0 });
+                }
+
+                // Clear active session
+                KairosDB.clearSession();
+
                 document.getElementById('toast').classList.add('show');
                 setTimeout(() => {
-                    localStorage.removeItem('jobSessionData');
-                    window.location.href = 'jobs.html';
+                    window.location.href = `job-detail-complete.html?jobId=${jobId}`;
                 }, 1500);
             }, 1000);
         };
