@@ -269,16 +269,24 @@
             font-style: italic;
         }
 
+        .attach-btn-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
         .attach-add-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 28px;
+            gap: 6px;
+            padding: 10px 18px;
             border: 2px dashed #CCC;
             border-radius: 12px;
             background: #FDFDFD;
             color: #777;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: border-color 0.25s, color 0.25s;
@@ -288,6 +296,71 @@
             border-color: #C6152A;
             color: #C6152A;
         }
+
+        .attach-add-btn i { width: 15px; height: 15px; }
+
+        /* Attachment thumbnails grid */
+        .attach-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .attach-thumb {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1.5px solid #E0E0E0;
+            background: #FAFAFA;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .attach-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .attach-thumb .thumb-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.55);
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 3px 0;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .attach-thumb .thumb-remove {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(198,21,42,0.9);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        }
+
+        .attach-thumb .thumb-remove:hover { background: #A00F21; }
 
         /* Modal & UI Elements */
         /* (Inherited from prev version for consistency) */
@@ -358,31 +431,8 @@
             color: #666;
         }
 
-        .sig-preview {
-            display: none;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .sig-preview img {
-            width: 100%;
-            max-height: 120px;
-            object-fit: contain;
-            border: 1px solid #E0E0E0;
-            border-radius: 10px;
-            background: white;
-        }
-
-        .remove-sig {
-            margin-top: 8px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: #C6152A;
-            cursor: pointer;
-            font-weight: 600;
-        }
+        /* Hidden file inputs */
+        .hidden-input { display: none; }
 
         .submit-section {
             padding: 16px;
@@ -577,17 +627,21 @@
                 <h2><i data-lucide="paperclip"></i> Attachments</h2>
                 <div class="attach-zone disabled" id="attachZone">
                     <p class="attach-label-msg" id="attachMsg">Select Supervisor to unlock attachments</p>
-                    <button class="attach-add-btn" id="addSigBtn">
-                        <i data-lucide="pen-tool"></i>
-                        Add Signature
-                    </button>
-                    <div class="sig-preview" id="sigPreview">
-                        <img id="sigImage" src="" alt="Signature">
-                        <div class="remove-sig" id="removeSig">
-                            <i data-lucide="trash-2"></i> Remove signature
-                        </div>
+                    <div class="attach-btn-row">
+                        <button class="attach-add-btn" id="addSigBtn">
+                            <i data-lucide="pen-tool"></i> Signature
+                        </button>
+                        <button class="attach-add-btn" id="addPhotoBtn">
+                            <i data-lucide="image"></i> Upload
+                        </button>
+                        <button class="attach-add-btn" id="addCameraBtn">
+                            <i data-lucide="camera"></i> Camera
+                        </button>
                     </div>
+                    <div class="attach-grid" id="attachGrid"></div>
                 </div>
+                <input type="file" accept="image/*" multiple class="hidden-input" id="photoInput">
+                <input type="file" accept="image/*" capture="environment" class="hidden-input" id="cameraInput">
             </div>
 
         </div><!-- /confirm-scroll -->
@@ -639,7 +693,7 @@
             if (val) {
                 supervisorName.value = supervisorMap[val] || '';
                 attachZone.classList.remove('disabled');
-                attachMsg.textContent = 'Add signature below';
+                attachMsg.textContent = 'Add signatures or photos below';
             } else {
                 supervisorName.value = '';
                 attachZone.classList.add('disabled');
@@ -647,17 +701,51 @@
             }
         });
 
-        /* ── Signature Canvas logic (Simplified from before) ── */
-        const sigOverlay = document.getElementById('sigOverlay'), sigCanvas = document.getElementById('sigCanvas');
-        const ctx = sigCanvas.getContext('2d'), sigImage = document.getElementById('sigImage'), sigPreview = document.getElementById('sigPreview'), addSigBtn = document.getElementById('addSigBtn');
+        /* ── Attachments state ── */
+        let attachments = []; // { id, type:'signature'|'photo', dataUrl }
+        let attachIdCounter = 0;
+        const attachGrid = document.getElementById('attachGrid');
+
+        function addAttachment(type, dataUrl) {
+            attachments.push({ id: ++attachIdCounter, type, dataUrl });
+            renderAttachments();
+        }
+
+        function removeAttachment(id) {
+            attachments = attachments.filter(a => a.id !== id);
+            renderAttachments();
+        }
+
+        function renderAttachments() {
+            attachGrid.innerHTML = '';
+            const sigCount = attachments.filter(a => a.type === 'signature').length;
+            const photoCount = attachments.filter(a => a.type === 'photo').length;
+            attachments.forEach((a, i) => {
+                const div = document.createElement('div');
+                div.className = 'attach-thumb';
+                const label = a.type === 'signature'
+                    ? 'Sig #' + (attachments.filter((x,j) => x.type==='signature' && j<=i).length)
+                    : 'Photo #' + (attachments.filter((x,j) => x.type==='photo' && j<=i).length);
+                div.innerHTML = `<img src="${a.dataUrl}" alt="${a.type}"><span class="thumb-label">${label}</span><button class="thumb-remove" data-id="${a.id}">&times;</button>`;
+                attachGrid.appendChild(div);
+            });
+            attachGrid.querySelectorAll('.thumb-remove').forEach(btn => {
+                btn.onclick = () => removeAttachment(Number(btn.dataset.id));
+            });
+            lucide.createIcons();
+        }
+
+        /* ── Signature Canvas logic ── */
+        const sigOverlay = document.getElementById('sigOverlay');
+        const sigCanvas = document.getElementById('sigCanvas');
+        const ctx = sigCanvas.getContext('2d');
         let drawing = false;
 
-        addSigBtn.onclick = () => { sigOverlay.classList.add('open'); resize(); };
-        document.getElementById('cancelSigBtn').onclick = () => sigOverlay.classList.remove('open');
+        document.getElementById('addSigBtn').onclick = () => { sigOverlay.classList.add('open'); resizeCanvas(); };
+        document.getElementById('cancelSigBtn').onclick = () => { sigOverlay.classList.remove('open'); ctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height); };
         document.getElementById('clearSigBtn').onclick = () => ctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
-        document.getElementById('removeSig').onclick = () => { sigImage.src = ''; sigPreview.style.display = 'none'; addSigBtn.style.display = ''; drawing = false; ctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height); };
 
-        function resize() { sigCanvas.width = sigCanvas.parentElement.clientWidth; sigCanvas.height = sigCanvas.parentElement.clientHeight; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#222'; }
+        function resizeCanvas() { sigCanvas.width = sigCanvas.parentElement.clientWidth; sigCanvas.height = sigCanvas.parentElement.clientHeight; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#222'; }
         function getPos(e) { const r = sigCanvas.getBoundingClientRect(); return { x: (e.touches ? e.touches[0].clientX : e.clientX) - r.left, y: (e.touches ? e.touches[0].clientY : e.clientY) - r.top }; }
 
         sigCanvas.onmousedown = sigCanvas.ontouchstart = (e) => { if (e.touches) e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); };
@@ -665,11 +753,29 @@
         sigCanvas.onmouseup = sigCanvas.ontouchend = () => drawing = false;
 
         document.getElementById('saveSigBtn').onclick = () => {
-            sigImage.src = sigCanvas.toDataURL();
-            sigPreview.style.display = 'block';
-            addSigBtn.style.display = 'none';
+            addAttachment('signature', sigCanvas.toDataURL());
+            ctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
             sigOverlay.classList.remove('open');
         };
+
+        /* ── Photo Upload logic ── */
+        const photoInput = document.getElementById('photoInput');
+        const cameraInput = document.getElementById('cameraInput');
+
+        document.getElementById('addPhotoBtn').onclick = () => photoInput.click();
+        document.getElementById('addCameraBtn').onclick = () => cameraInput.click();
+
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                if (!file.type.startsWith('image/')) return;
+                const reader = new FileReader();
+                reader.onload = (e) => addAttachment('photo', e.target.result);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        photoInput.addEventListener('change', (e) => { handleFiles(e.target.files); e.target.value = ''; });
+        cameraInput.addEventListener('change', (e) => { handleFiles(e.target.files); e.target.value = ''; });
 
         /* ── Submit logic ── */
         document.getElementById('submitBtn').onclick = function () {
